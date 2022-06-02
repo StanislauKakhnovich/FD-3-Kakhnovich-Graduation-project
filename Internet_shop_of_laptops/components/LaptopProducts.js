@@ -26,7 +26,7 @@ class LaptopProducts extends React.PureComponent {
 
     return (
       <div className='MobileCompany'>
-        <div className='MobileCompanyName'>Компания &laquo;Ноутбуки для всех&raquo;</div>
+        
         <div className='MobileCompanyClients'>
           {productsCode}
         </div>

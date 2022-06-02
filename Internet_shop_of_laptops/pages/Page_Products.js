@@ -9,9 +9,12 @@ class Page_Products extends React.PureComponent {
   render() {
 
     return (
-      <LaptopProducts
+      <div>
+        <h1>Интернет-магазин "Ноутбуки для всех"</h1>
+        <LaptopProducts
         products={productsArr}
       />
+      </div>
     );
     
   }
