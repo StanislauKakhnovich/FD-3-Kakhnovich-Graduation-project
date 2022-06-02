@@ -1,0 +1,21 @@
+h1.NameCompany {
+    text-align: center;
+    font-size: 40px;
+}
+.TextAboutCompany {
+    font-size: 22px;
+    line-height: 1.6;
+    margin: 0 20px 0 40px;
+}
+
+@media only screen and (max-width: 580px) {
+    h1.NameCompany {
+        font-size: 26px;
+    }
+    .TextAboutCompany {
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 0 5px 0 5px;
+    }
+    
+}

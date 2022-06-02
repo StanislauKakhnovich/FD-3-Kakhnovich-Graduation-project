@@ -25,12 +25,10 @@ class LaptopProducts extends React.PureComponent {
     );
 
     return (
-      <div className='MobileCompany'>
         
-        <div className='MobileCompanyClients'>
+        <div className='LaptopProducts'>
           {productsCode}
         </div>
-      </div>
     )
     ;
 

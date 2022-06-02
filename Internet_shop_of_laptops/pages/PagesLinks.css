@@ -1,8 +1,25 @@
 .PageLink {
     color: black;
-    margin-right: 10px;
+    margin-right: 15px;
+    
 }
 
 .ActivePageLink {
     font-weight: bold;
+}
+.HeaderLinks {
+    text-align: right;
+    font-size: 18px;
+    margin: 30px 20px 15px 40px;
+}
+
+@media only screen and (max-width: 580px) {
+    .PageLink {
+        margin-right: 5px;
+    }
+    .HeaderLinks {
+        font-size: 10px;
+        margin: 30px 5px 15px 5px;
+    }
+    
 }

@@ -1,17 +1,44 @@
-﻿div.MobileClient
-{
-  padding: 2px 0;
+﻿.LaptopProduct {
+  display: flex;
+  margin: 20px 0;
+
+}
+.Name-Description {
+  max-width: 500px;
+  margin: 0 20px;
+}
+.ImageLaptop {
+  margin: 0 20px;
+}
+.NameProduct {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+.NameProduct:hover {
+  text-decoration: underline;
+  font-weight: 900;
+}
+.AddProductBasket {
+  max-height: 30px;
 }
 
-span.MobileClientBalance
-{
-  
-  
-  font-weight: bold;
-  text-align: right;
+@media only screen and (max-width: 930px){
+  .AddProductBasket {
+    max-height: 40px;
+  }
 }
 
-span.MobileClientFIO
-{
-  margin-right: 30px;
+
+@media only screen and (max-width: 450px) {
+  .LaptopProduct {
+    flex-direction: column;
+  }
+  .Name-Description,
+  .ImageLaptop {
+    margin: 0 5px;
+  }
+  .ProductDescription {
+    display: none;
+  }
 }

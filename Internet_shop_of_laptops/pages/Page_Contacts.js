@@ -1,13 +1,15 @@
 import React from 'react';
 
+import './Page_Contacts.css';
+
 class Page_Contacts extends React.PureComponent {
           
   render() {
 
     return (
       <div>
-        <h1>Интернет-магазин "Ноутбуки для всех"</h1>
-        <div>
+        <h1 className='NameCompany'>Интернет&ndash;магазин &laquo;Ноутбуки для всех&raquo;</h1>
+        <div className='ContactsCompany'>
         Минская область, Минский район, Боровлянский с/с, д. Лесковка, ул. Бирючинная, д.254, пом. 1
         <br/>
         Почтовый адрес: Минская область, Минский район, Боровлянский с/с, д. Лесковка, ул. Бирючинная, д.254, пом. 1
@@ -22,9 +24,9 @@ class Page_Contacts extends React.PureComponent {
         <br/>
         test@tut.by
         <br/>
-        Пн-пт 10:00 — 20:00
+        Пн&ndash;пт 10:00 &ndash; 20:00
         <br/>
-        Суббота 10:00 — 18:00.
+        Суббота 10:00 &ndash; 18:00.
         </div>
       </div>
     );

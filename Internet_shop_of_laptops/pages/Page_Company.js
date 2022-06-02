@@ -1,4 +1,5 @@
 import React from 'react';
+import './Page_Company.css';
 
 class Page_Company extends React.PureComponent {
           
@@ -6,8 +7,8 @@ class Page_Company extends React.PureComponent {
 
     return (
       <div>
-        <h1>Интернет-магазин "Ноутбуки для всех"</h1>
-        <div>
+        <h1 className='NameCompany'>Интернет&ndash;магазин &laquo;Ноутбуки для всех&raquo;</h1>
+        <div className='TextAboutCompany'>
             Добро пожаловать на наш сайт! Мы являемся крупнейшим продавцом ноутбуков на рынке Беларуси. 
             Мы занимаемся продажами ноутбуков начиная с 2010 года. Наша компания является официальным дилером таких производителей, 
             как "Apple", "HP", "Asus", "Lenovo" и др. На нашем сайте вы найдете широчайший выбор ноутбуков. Обратившись к нам вы получите

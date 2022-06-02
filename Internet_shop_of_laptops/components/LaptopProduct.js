@@ -18,9 +18,19 @@ class LaptopProduct extends React.PureComponent {
   render() {
     
     return (
-      <div className='MobileClient'>
-        <span className='MobileClientBalance'>{this.props.info.description}</span>
-        <NavLink to={"/product/"+this.props.info.id} className="MobileClientFIO">{this.props.info.nameProduct}</NavLink>
+      <div className='LaptopsContainer'>
+      <div className='LaptopProduct'>
+        <div className='ImageLaptop'>
+          <img src={`../images/${this.props.info.nameProduct.replace(/\s/g, '_')}.jpeg`}></img>
+        </div>
+        <div className='Name-Description'>
+          <NavLink to={"/product/"+this.props.info.id} className="NameProduct">{this.props.info.nameProduct}</NavLink>
+          <div className='ProductDescription'>{this.props.info.description}</div>
+          {/* <div className='ProductDescription'>{this.props.info.id}</div> */}
+          
+        </div>
+        <button className='AddProductBasket'>В корзину</button>
+      </div>
       </div>
     );
 

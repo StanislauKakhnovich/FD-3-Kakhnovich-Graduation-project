@@ -1,17 +1,8 @@
-﻿.MobileCompany
-{
-  border: double gray 3px;
-  width: 180px;
-  padding: 3px 7px;
-  background-color: lightyellow;
+﻿.LaptopsContainer {
+  margin: 0 auto 0 auto;
 }
 
-.MobileCompanyName
-{
-  font-weight: bold;
-}
-
-.MobileCompanyClients
-{
-  padding-top: 5px;
+.LaptopProducts {
+  display: flex;
+  flex-direction: column;
 }

@@ -11,9 +11,7 @@ class Sign_Up extends React.PureComponent {
 
     return (
       <div>
-        <h1>
-        Интернет-магазин&laquo;Ноутбуки для всех&raquo;
-      </h1>
+        <h1 className='NameCompany'>Интернет&ndash;магазин &laquo;Ноутбуки для всех&raquo;</h1>
         <div>форма регистрации</div>
       </div>
       
