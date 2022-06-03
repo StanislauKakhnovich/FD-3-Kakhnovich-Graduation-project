@@ -1,10 +1,13 @@
+form {
+    margin-left: 20px;
+}
 div.registration {
     margin-left: 107px;   
     margin-top: 10px;  
 }
 
 div.registration input {
-    width: 60%;
+    width: 40%;
     box-sizing: border-box;
 }
 input {
@@ -41,6 +44,7 @@ label {
     opacity: 0.5;
 }
 
+
 @media only all and (max-width: 1050px){
    
     .clearfix::after {
@@ -51,10 +55,19 @@ label {
         line-height: 0;
         height: 0;
     }
+    div.registration input {
+        width: 70%;
+    }
 }
 
 @media only all and (max-width: 350px) {
     div.registration {
         margin-left: 0;
+    }
+    div.registration input {
+        width: 90%;
+    }
+    form {
+        margin-left: 5px;
     }
 }

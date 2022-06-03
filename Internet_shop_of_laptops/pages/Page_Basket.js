@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Basket from '../components/Basket';
+import BasketProducts from '../components/BasketProducts';
 
 
 class Page_Basket extends React.PureComponent {
@@ -8,7 +8,7 @@ class Page_Basket extends React.PureComponent {
   render() {
 
     return (
-      <Basket/>
+      <BasketProducts/>
     ); 
   }
 }

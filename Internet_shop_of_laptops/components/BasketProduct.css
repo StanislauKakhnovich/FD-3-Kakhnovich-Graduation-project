@@ -1,0 +1,27 @@
+.CounterButton {
+    margin: 0 5px auto 5px;
+    min-width: 70px;
+}
+
+.CounterButtonValue {
+    margin: 0 5px 0 5px;
+}
+
+.DeleteProductBasket {
+    max-height: 30px;
+    min-width: 85px;
+    margin: 0 5px auto 5px;
+    font-size: 14px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .CounterButton,
+    .DeleteProductBasket {
+      text-align: center;
+      margin: 5px auto;
+    }
+    .DeleteProductBasket {
+        max-width: 60px;
+    }
+  }
+
