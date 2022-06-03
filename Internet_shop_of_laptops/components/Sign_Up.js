@@ -1,26 +1,140 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
 
+import './Sign_Up.css';
+
 class Sign_Up extends React.PureComponent {
 
-  static propTypes = {
-    
-  };
+  state = {
+    Name: null,
+    Country: null,
+    Town: null,
+    Email: null,
+    Password: null,
+    controlEmail: false,
+    controlPassword: false,
+}
+
+NameAdd = (EO) => {
+  this.setState( {Name:EO.target.value} );
+}
+
+CountryAdd = (EO) => {
+  this.setState( {Country:EO.target.value} );
+}
+
+TownAdd = (EO) => {
+  this.setState( {Town:EO.target.value} );
+}
+
+
+EmailAdd = (EO) => {
+  this.setState( {Email:EO.target.value} );
+  /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(EO.target.value) ? this.setState( {controlEmail:true} ) : this.setState( {controlEmail:false});
+}
+
+PasswordAdd = (EO) => {
+  this.setState( {Password:EO.target.value} );
+  EO.target.value.length < 4 ? this.setState( {controlPassword:false} ) : this.setState( {controlPassword:true});
+}
+
+
+
+saveChanged = () => {
+    if(this.state.newName&&this.state.newPrice&&this.state.newQuantity&&this.state.newURL&&!this.state.controlEmpty&&
+      !this.state.controlName&&!this.state.controlPrice&&!this.state.controlQuantity&&!this.state.controlURLLatin&&
+      !this.state.controlURLFormat) {
+      let objNewData = {
+          "nameProduct": this.state.newName, 
+          "code":this.props.code, 
+          "price":this.state.newPrice, 
+          "quantity":this.state.newQuantity, 
+          "imgURL":this.state.newURL,
+        };
+      this.props.cbSaved(objNewData, this.props.code);
+      this.props.cbBunButtonsEdit(true);
+      this.props.cbBunButtonsDeleteNew(true);
+    }
+}
 
   render() {
 
     return (
       <div>
         <h1 className='NameCompany'>Интернет&ndash;магазин &laquo;Ноутбуки для всех&raquo;</h1>
-        <div>форма регистрации</div>
+        <form  action="#" noValidate className='form-sign-up'>
+          <div className="clearfix">
+              <label id="label-name" htmlFor="name">Ваше имя:</label>
+              <div className="registration"><input  id="name" type="text" name="nameUser" onChange={this.NameAdd}></input>
+                {
+                  !this.state.Name&&
+                  <div className="ErrorValid">Поле не должно быть пустым.</div>
+                }
+              </div>
+          </div>
+          <div className="clearfix">
+              <label id="label-country" htmlFor="country">Страна:</label>
+              <div className="registration"><input  id="country" type="text" name="country" onChange={this.CountryAdd}></input>
+                  {
+                    !this.state.Country&&
+                    <div className="ErrorValid">Поле не должно быть пустым.</div>
+                  }
+              </div>
+          </div>
+          <div className="clearfix">
+              <label id="label-town" htmlFor="town">Город:</label>
+              <div className="registration"><input  id="town" type="text" name="town"  onChange={this.TownAdd}></input>
+                  {
+                    !this.state.Town&&
+                    <div className="ErrorValid">Поле не должно быть пустым.</div>
+                  }
+              </div>
+          </div>
+          <div className="clearfix">
+              <label id="label-e-mail-up" htmlFor="e-mail-up">Ваш e-mail:</label>
+              <div className="registration"><input  id="e-mail-up" type="text" name="mail" onChange={this.EmailAdd}></input>
+                  {
+                    !this.state.Email&&
+                    <div className="ErrorValid">Поле не должно быть пустым.</div>
+                  }
+                  {
+                    !this.state.controlEmail&&
+                    <div className="ErrorValid">E-mail не валидный.</div>
+                  }
+              </div>
+          </div>
+          <div className="clearfix">
+              <label id="label-password-up" htmlFor="password-up">Введите пароль:</label>
+              <div className="registration"><input  id="password-up" type="text" name="password" onChange={this.PasswordAdd}></input>
+                  {
+                    !this.state.Password&&
+                    <div className="ErrorValid">Поле не должно быть пустым.</div>
+                  }
+                  {
+                    !this.state.controlPassword&&
+                    <div className="ErrorValid">Введите не менее 4 знаков.</div>
+                  }
+              </div>
+          </div>
+          <button id="submit" type="submit" className={`${this.state.Name&&this.state.Country&&this.state.Town&&
+                      this.state.Email&&this.state.controlEmail&&this.state.Password&&this.state.controlPassword
+                      ?'ButtonIn'
+                      :'ButtonOff'} ${'EditButtons'}`}>Зарегистрироваться</button>
+        </form>
       </div>
       
-      
-    )
-    ;
 
+                // <button className={`${this.state.newName&&this.state.newPrice&&this.state.newQuantity&&this.state.newURL&&
+                //     !this.state.controlEmpty&&!this.state.controlName&&!this.state.controlPrice&&!this.state.controlQuantity&&
+                //     !this.state.controlURLLatin&&!this.state.controlURLFormat
+                //     ?'ButtonIn'
+                //     :'ButtonOff'} ${'EditButtons'}`}  onClick={this.saveChanged} value>Сохранить
+                // </button>
+
+            //     <button className={`${'ButtonIn'} ${'EditButtons'}`} onClick={this.cancelChanged}>Отмена</button>
+            // </div>
+    );
   }
-
 }
 
 export default Sign_Up;

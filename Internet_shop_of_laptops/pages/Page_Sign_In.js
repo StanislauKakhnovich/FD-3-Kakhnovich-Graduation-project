@@ -9,10 +9,8 @@ class Page_Sign_In extends React.PureComponent {
 
     return (
       <Sign_In/>
-    );
-    
+    ); 
   }
-
 }
     
 export default Page_Sign_In;

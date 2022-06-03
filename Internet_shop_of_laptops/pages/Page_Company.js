@@ -8,6 +8,9 @@ class Page_Company extends React.PureComponent {
     return (
       <div>
         <h1 className='NameCompany'>Интернет&ndash;магазин &laquo;Ноутбуки для всех&raquo;</h1>
+        <div className='MainImg'>
+          <img src='../images/main.png' title='Laptops' alt='Main image'></img>
+        </div>
         <div className='TextAboutCompany'>
             Добро пожаловать на наш сайт! Мы являемся крупнейшим продавцом ноутбуков на рынке Беларуси. 
             Мы занимаемся продажами ноутбуков начиная с 2010 года. Наша компания является официальным дилером таких производителей, 

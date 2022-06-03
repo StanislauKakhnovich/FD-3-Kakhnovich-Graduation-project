@@ -6,6 +6,7 @@ import Page_Products from './Page_Products';
 import Page_Product from './Page_Product';
 import Page_Sign_Up from './Page_Sign_Up';
 import Page_Sign_In from './Page_Sign_In';
+import Page_Basket from './Page_Basket';
 import Page_Contacts from './Page_Contacts';
 
 class PagesRouter extends React.Component {
@@ -19,6 +20,7 @@ class PagesRouter extends React.Component {
         <Route path="/product/:prid" element={<Page_Product/>} />
         <Route path="/sign_up" element={<Page_Sign_Up/>} />
         <Route path="/sign_in" element={<Page_Sign_In/>} />
+        <Route path="/basket" element={<Page_Basket/>} />
         <Route path="/contacts" element={<Page_Contacts/>} />
       </Routes>
     );
