@@ -1,0 +1,62 @@
+.LaptopContainerInfo {
+    margin: 0 auto;
+    padding: 15px;
+  }
+
+.NameProductInfo {
+    font-size: 32px;
+    color: black;
+    font-weight: 600;
+}
+.ProductDescriptionInfo {
+    font-size: 20px;
+    line-height: 1.5;
+}
+.DetailedInfoProduct {
+    font-size: 16px;
+    line-height: 1.3;
+}
+.ProductPriceInfo {
+    font-size: 20px;
+}
+.VerticalContainer {
+    margin: 0 auto;
+}
+.ProductDescriptionInfo,
+.DetailedInfoProduct,
+.ProductPriceInfo,
+.AddProductBasketInfo {
+    margin: 0 10px 15px 20px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .VerticalContainer {
+        display: flex;
+        flex-direction: column;
+    }
+    .AddProductBasketInfo {
+        max-width: 78px;
+        margin: 0 auto;
+    }
+    .ImageLaptopInfo,
+    .ProductPriceInfo {
+        text-align: center;
+        margin: 10px;
+    }
+    .NameProductInfo {
+        font-size: 22px;
+        text-align: center;
+    }
+    .ProductDescriptionInfo {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    .DetailedInfoProduct {
+        font-size: 14px;
+        line-height: 1.3;
+    }
+    .ProductPriceInfo {
+        font-size: 16px;
+    }
+}

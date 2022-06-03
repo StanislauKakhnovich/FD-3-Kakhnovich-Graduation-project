@@ -16,9 +16,7 @@ class Page_Products extends React.PureComponent {
       />
       </div>
     );
-    
   }
-
 }
     
 export default Page_Products;

@@ -19,18 +19,17 @@ class LaptopProduct extends React.PureComponent {
     
     return (
       <div className='LaptopsContainer'>
-      <div className='LaptopProduct'>
-        <div className='ImageLaptop'>
-          <img src={`../images/${this.props.info.nameProduct.replace(/\s/g, '_')}.jpeg`}></img>
+        <div className='LaptopProduct'>
+          <div className='ImageLaptop'>
+            <img src={`../images/${this.props.info.nameProduct.replace(/\s/g, '_')}.jpeg`} title={this.props.info.nameProduct} alt='Фото ноутбука'></img>
+          </div>
+          <div className='Name-Description'>
+            <NavLink to={"/product/"+this.props.info.id} className="NameProduct">Ноутбук {this.props.info.nameProduct}</NavLink>
+            <div className='ProductDescription'>{this.props.info.description}</div>
+          </div>
+          <div className='ProductPrice'>{this.props.info.price.toFixed(2)} руб</div>
+            <button className='AddProductBasket'>В корзину</button>
         </div>
-        <div className='Name-Description'>
-          <NavLink to={"/product/"+this.props.info.id} className="NameProduct">{this.props.info.nameProduct}</NavLink>
-          <div className='ProductDescription'>{this.props.info.description}</div>
-          {/* <div className='ProductDescription'>{this.props.info.id}</div> */}
-          
-        </div>
-        <button className='AddProductBasket'>В корзину</button>
-      </div>
       </div>
     );
 

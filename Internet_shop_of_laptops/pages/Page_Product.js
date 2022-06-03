@@ -26,9 +26,12 @@ class Page_Product extends React.PureComponent {
     let productData=productsArr.find( product => product.id==productId );
 
     return (
-      <LaptopProductInfo
-        info={productData}
-      />
+      <div>
+        <h1 className='NameCompany'>Интернет&ndash;магазин &laquo;Ноутбуки для всех&raquo;</h1>
+        <LaptopProductInfo
+          info={productData}
+        />
+      </div>
     );
   }
 

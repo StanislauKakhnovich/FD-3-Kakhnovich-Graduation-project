@@ -1,4 +1,8 @@
-﻿.LaptopProduct {
+﻿.LaptopsContainer {
+  margin: 0 auto;
+}
+
+.LaptopProduct {
   display: flex;
   margin: 20px 0;
 
@@ -12,7 +16,7 @@
 }
 .NameProduct {
   text-decoration: none;
-  color: black;
+  color: blue;
   font-weight: 600;
 }
 .NameProduct:hover {
@@ -21,24 +25,40 @@
 }
 .AddProductBasket {
   max-height: 30px;
+  min-width: 85px;
+  margin: 0 15px;
+  font-size: 14px;
+}
+.ProductPrice {
+  margin: 0 15px;
+  font-size: 18px;
+  min-width: 100px;
 }
 
-@media only screen and (max-width: 930px){
-  .AddProductBasket {
-    max-height: 40px;
-  }
-}
-
-
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 600px) {
   .LaptopProduct {
     flex-direction: column;
-  }
-  .Name-Description,
-  .ImageLaptop {
-    margin: 0 5px;
   }
   .ProductDescription {
     display: none;
   }
+  .Name-Description,
+  .AddProductBasket,
+  .ProductPrice {
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .AddProductBasket {
+    max-width: 77px;
+  }
+  .ProductPrice {
+    font-size: 16px;
+  }
+  .ImageLaptop,
+  .NameProduct,
+  .ProductDescription,
+  .AddProductBasket {
+    margin: 5px auto;
+  }
+
 }

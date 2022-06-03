@@ -23,17 +23,12 @@ class LaptopProducts extends React.PureComponent {
     var productsCode=this.props.products.map( product =>
       <LaptopProduct key={product.id} info={product}  />
     );
-
     return (
-        
         <div className='LaptopProducts'>
           {productsCode}
         </div>
-    )
-    ;
-
+    );
   }
-
 }
 
 export default LaptopProducts;
