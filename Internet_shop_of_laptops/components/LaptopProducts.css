@@ -2,4 +2,71 @@
 .LaptopProducts {
   display: flex;
   flex-direction: column;
+  margin-left: 10px;
+}
+.ContainerProducts {
+  position: relative;
+}
+.TopPanel,
+.BottomPanel {
+  text-align: center;
+}
+.AllProduct,
+.TenProduct,
+.NextTenProduct,
+.Filters{
+  margin: 10px;
+  min-width: 167px;
+}
+select {
+  margin: 5px;
+}
+.FilterLeft {
+  float: left;
+  margin-left: 50px;
+}
+.FilterPrice{
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+select {
+  margin: 0;
+}
+.LeftNameFilter {
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+.Producer,
+.Appointment,
+.SkreenDiagonal,
+.Ram,
+.HddSdd,
+.Os {
+  margin-bottom: 15px;
+}
+
+.CloseFilters {
+  margin-bottom: 15px;
+}
+.FilterLeftMobil {
+  display: none;
+}
+
+.FilterLeftMobil {
+  display: block;
+  position: absolute;
+  right: 10px;
+  background-color: rgba(255, 166, 0, 0.895);
+  margin-left: 10px;
+  padding: 10px;
+}
+.CloseFilters {
+  min-width: 183px;
+}
+
+.Hidden {
+  display: none;
 }
