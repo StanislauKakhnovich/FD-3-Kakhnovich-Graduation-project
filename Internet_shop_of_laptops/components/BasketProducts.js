@@ -29,7 +29,7 @@ class BasketProducts extends React.PureComponent {
         <h1 className='NameCompany'>Интернет&ndash;магазин &laquo;Ноутбуки для всех&raquo;</h1>
         <div className='Basket'>Корзина</div>
         <div className='Total'>{this.state.quantity} товар на сумму {this.state.sum} рублей.</div>
-        <div className='ProductsSelected'>{productsSelected}</div>
+        <div className='LaptopProducts'>{productsSelected}</div>
       </div>
     );
   }

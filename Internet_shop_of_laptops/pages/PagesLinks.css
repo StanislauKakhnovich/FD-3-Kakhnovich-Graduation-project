@@ -13,13 +13,20 @@
     margin: 30px 20px 15px 40px;
 }
 
-@media only screen and (max-width: 580px) {
+@media only screen and (max-width: 650px) {
     .PageLink {
         margin-right: 5px;
     }
     .HeaderLinks {
-        font-size: 10px;
+        font-size: 14px;
         margin: 30px 5px 15px 5px;
+    }
+    .HeaderLinks {
+        text-align: center;
+        font-size: 18px;
+        margin: 30px 20px 15px 40px;
+        display: flex;
+        flex-direction: column;
     }
     
 }

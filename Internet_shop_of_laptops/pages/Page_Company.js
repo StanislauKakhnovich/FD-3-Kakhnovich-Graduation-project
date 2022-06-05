@@ -9,7 +9,7 @@ class Page_Company extends React.PureComponent {
       <div>
         <h1 className='NameCompany'>Интернет&ndash;магазин &laquo;Ноутбуки для всех&raquo;</h1>
         <div className='MainImg'>
-          <img src='../images/main.png' title='Laptops' alt='Main image'></img>
+          <img className='MainImg_1' src='../images/main.png' title='Laptops' alt='Main image'></img>
         </div>
         <div className='TextAboutCompany'>
             Добро пожаловать на наш сайт! Мы являемся крупнейшим продавцом ноутбуков на рынке Беларуси. 

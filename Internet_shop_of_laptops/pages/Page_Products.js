@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import LaptopProducts from '../components/LaptopProducts';
+import LaptopProductsInterface from '../components/LaptopProductsInterface';
 import {connect} from 'react-redux';
 
 class Page_Products extends React.PureComponent {
@@ -10,7 +10,7 @@ class Page_Products extends React.PureComponent {
     return (
       <div>
         <h1 className='NameCompany'>Интернет&ndash;магазин &laquo;Ноутбуки для всех&raquo;</h1>
-        <LaptopProducts
+        <LaptopProductsInterface
       />
       </div>
     );
