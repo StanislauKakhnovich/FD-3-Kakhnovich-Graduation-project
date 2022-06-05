@@ -21,10 +21,6 @@
 select {
   margin: 5px;
 }
-.FilterLeft {
-  float: left;
-  margin-left: 50px;
-}
 .FilterPrice{
   font-size: 16px;
   margin-top: 20px;
@@ -33,7 +29,7 @@ select {
 select {
   margin: 0;
 }
-.LeftNameFilter {
+.SideNameFilter {
   font-size: 18px;
   font-weight: 900;
   line-height: 1.5;
@@ -47,26 +43,28 @@ select {
 .Os {
   margin-bottom: 15px;
 }
-
-.CloseFilters {
-  margin-bottom: 15px;
-}
-.FilterLeftMobil {
-  display: none;
-}
-
-.FilterLeftMobil {
+.SidePanelFilters {
   display: block;
   position: absolute;
-  right: 10px;
+  right: 20px;
   background-color: rgba(255, 166, 0, 0.895);
-  margin-left: 10px;
   padding: 10px;
 }
 .CloseFilters {
+  margin-bottom: 15px;
   min-width: 183px;
 }
-
 .Hidden {
   display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .SidePanelFilters {
+    right: 10px;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .SidePanelFilters {
+    right: 5px;
+  }
 }
