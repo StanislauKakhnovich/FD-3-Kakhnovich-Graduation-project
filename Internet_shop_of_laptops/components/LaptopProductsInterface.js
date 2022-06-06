@@ -2,19 +2,32 @@
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+
 import LaptopProducts from './LaptopProducts';
+
 
 import './LaptopProductsInterface.css';
 
 class int_LaptopProductsInterface extends React.PureComponent {
 
   static propTypes = {
-
+    products: PropTypes.array.isRequired, // получено из Redux
   };
   
   state = {
     filter: true,
     asus: {"nameProduct": "Asus"},
+    products: this.props.products,
+    controls: [],
+    conformity: {
+      '4': (elem)=>{return /Apple/.test(elem.nameProduct)},
+      '5': (elem)=>{return /ASUS/.test(elem.nameProduct)},
+      '6': (elem)=>{return /Lenovo/.test(elem.nameProduct)},
+      '7': (elem)=>{return /HP/.test(elem.nameProduct)},
+      '8': (elem)=>{return /HONOR/.test(elem.nameProduct)},
+      '9': (elem)=>{return /Xiaomi/.test(elem.nameProduct)},
+      '10': (elem)=>{return /Huawei/.test(elem.nameProduct)}
+    }
 
   }
 
@@ -24,26 +37,57 @@ class int_LaptopProductsInterface extends React.PureComponent {
   closeFilterSide = () => {
     this.setState( {filter:true} );
   }
-  choice = (EO) => {
- 
-      console.log(EO.target.value, EO.target.checked);
- 
+
+  changedControls = (check1, value1) =>{
+    let arr=[...this.state.controls];
+    if(check1) {
+      arr=[...arr, value1]
+      console.log(arr)
+    } 
+    
+    else if (!check1) {
+      arr=arr.filter(control => control !== value1)
+      console.log(arr)
+    } 
+    this.setState( {controls:  arr});
+    console.log(this.state.controls)
   }
-  //apple={"nameProduct": "Apple"};
-  // asus: {"nameProduct": "Asus"},
-  // lenovo: {"nameProduct": "Lenovo"},
-  // hp: {"nameProduct": "HP"},
-  // honor: {"nameProduct": "HONOR"},
-  // xiaomi: {"nameProduct": "Xiaomi"},
-  // huawei: {"nameProduct": "Huawei"},
-  // study: {"appointment": "для учебы"},
-  // home: {"appointment": "для дома"},
-  // game: {"appointment": "игровой"},
-  // code: {"appointment": "для программирования"},
-  // size: {"appointment": "компактный"},
+
+
+  choice = (EO) => {
+    if(EO.target.checked) {
+      let arr=[...this.state.controls];
+      arr=[...arr, EO.target.value]
+      this.setState( {controls:  arr});
+    } 
+    
+    else if (!EO.target.checked) {
+      let arr=[...this.state.controls];
+      arr=arr.filter(control => control !== EO.target.value)
+      this.setState( {controls: arr} );
+    } 
+  }
+
+
+  filterClick =() =>{
+      if (this.state.controls.length==0) {
+        this.setState( {products: this.props.products});
+      }
+      else {
+        let arr = [...this.props.products];
+        let arr1= arr.filter(elem=>{
+        return this.state.controls.some(control=>{
+          return this.state.conformity[control](elem)
+        })
+      })
+      this.setState( {products: arr1});
+    }
+  }
+
 
   render() {
 
+    console.log("LaptopProductsIntrface render");
 
     return (
         <div className='ContainerProducts'>
@@ -69,28 +113,28 @@ class int_LaptopProductsInterface extends React.PureComponent {
             </select>
               <div className='Producer'>
                 <div className='SideNameFilter'>Производитель:</div>
-                <input className='LeftRadio' type='checkbox' name='producer' value={"Apple"} onClick={this.choice}/><span className='LeftVariant'>Apple</span><br/>
-                <input className='LeftRadio' type='checkbox' name='producer' value={this.state.asus} onClick={this.choice}/><span className='LeftVariant'>Asus</span><br/>
-                <input className='LeftRadio' type='checkbox' name='producer' value={this.state.lenovo} onClick={this.choice}/><span className='LeftVariant'>Lenovo</span><br/>
-                <input className='LeftRadio' type='checkbox' name='producer' value={this.state.hp} onClick={this.choice}/><span className='LeftVariant'>HP</span><br/>
-                <input className='LeftRadio' type='checkbox' name='producer' value={this.state.honor} onClick={this.choice}/><span className='LeftVariant'>HONOR</span><br/>
-                <input className='LeftRadio' type='checkbox' name='producer' value={this.state.xiaomi} onClick={this.choice}/><span className='LeftVariant'>Xiaomi</span><br/>
-                <input className='LeftRadio' type='checkbox' name='producer' value={this.state.huawei} onClick={this.choice}/><span className='LeftVariant'>Huawei</span>
+                <input className='LeftRadio' type='checkbox' name='producer' value={4} onClick={this.choice}/><span className='LeftVariant'>Apple</span><br/>
+                <input className='LeftRadio' type='checkbox' name='producer' value={5} onClick={this.choice}/><span className='LeftVariant'>Asus</span><br/>
+                <input className='LeftRadio' type='checkbox' name='producer' value={6} onClick={this.choice}/><span className='LeftVariant'>Lenovo</span><br/>
+                <input className='LeftRadio' type='checkbox' name='producer' value={7} onClick={this.choice}/><span className='LeftVariant'>HP</span><br/>
+                <input className='LeftRadio' type='checkbox' name='producer' value={8} onClick={this.choice}/><span className='LeftVariant'>HONOR</span><br/>
+                <input className='LeftRadio' type='checkbox' name='producer' value={9} onClick={this.choice}/><span className='LeftVariant'>Xiaomi</span><br/>
+                <input className='LeftRadio' type='checkbox' name='producer' value={10} onClick={this.choice}/><span className='LeftVariant'>Huawei</span>
               </div>
               <div className='Appointment'>
               
                 <div className='SideNameFilter'>Назначение:</div>
-                <input className='LeftRadio' type='checkbox' name='appointment' value={'для учебы'}/><span className='LeftVariant'>для учебы</span><br/>
-                <input className='LeftRadio' type='checkbox' name='appointment' value={'для дома'}/><span className='LeftVariant'>для дома</span><br/>
-                <input className='LeftRadio' type='checkbox' name='appointment' value={'игровой'}/><span className='LeftVariant'>игровой</span><br/>
-                <input className='LeftRadio' type='checkbox' name='appointment' value={'для программирования'}/><span className='LeftVariant'>для программирования</span><br/>
-                <input className='LeftRadio' type='checkbox' name='appointment' value={'компактный'}/><span className='LeftVariant'>компактный</span>
+                <input className='LeftRadio' type='checkbox' name='appointment' value={11}/><span className='LeftVariant'>для учебы</span><br/>
+                <input className='LeftRadio' type='checkbox' name='appointment' value={12}/><span className='LeftVariant'>для дома</span><br/>
+                <input className='LeftRadio' type='checkbox' name='appointment' value={13}/><span className='LeftVariant'>игровой</span><br/>
+                <input className='LeftRadio' type='checkbox' name='appointment' value={14}/><span className='LeftVariant'>для программирования</span><br/>
+                <input className='LeftRadio' type='checkbox' name='appointment' value={15}/><span className='LeftVariant'>компактный</span>
               </div>
               <div className='SkreenDiagonal'>
                 <div className='SideNameFilter'>Диагональ экрана:</div>
-                <input className='LeftRadio' type='checkbox' name='skreen' value={'13'}/><span className='LeftVariant'>менее 13&rdquo;</span><br/>
-                <input className='LeftRadio' type='checkbox' name='skreen' value={'13-14'}/><span className='LeftVariant'>13 &ndash; 14&rdquo;</span><br/>
-                <input className='LeftRadio' type='checkbox' name='skreen' value={'15-16'}/><span className='LeftVariant'>15 &ndash; 16&rdquo;</span><br/>
+                <input className='LeftRadio' type='checkbox' name='skreen' value={16}/><span className='LeftVariant'>менее 13&rdquo;</span><br/>
+                <input className='LeftRadio' type='checkbox' name='skreen' value={17}/><span className='LeftVariant'>13 &ndash; 14&rdquo;</span><br/>
+                <input className='LeftRadio' type='checkbox' name='skreen' value={18}/><span className='LeftVariant'>15 &ndash; 16&rdquo;</span><br/>
                 <input className='LeftRadio' type='checkbox' name='skreen' value={19}/><span className='LeftVariant'>17&rdquo;</span><br/>
               </div>
               <div className='Ram'>
@@ -114,8 +158,9 @@ class int_LaptopProductsInterface extends React.PureComponent {
                 <input className='LeftRadio' type='checkbox' name='os' value={30}/><span className='LeftVariant'>Mac OS</span><br/>
                 <input className='LeftRadio' type='checkbox' name='os' value={31}/><span className='LeftVariant'>Без ОС</span>
               </div>
+              <button className='Filters' onClick={this.filterClick}>Применить фильтр</button>
           </div>
-          <LaptopProducts/>
+          <LaptopProducts products={this.state.products}/>
           <div className='BottomPanel'>
             <button className='NextTenProduct'>Следующие 10 товаров</button>
           </div>
@@ -124,10 +169,11 @@ class int_LaptopProductsInterface extends React.PureComponent {
   }
 }
 
+
 const mapStateToProps = function (state) {
   return {
     products: state.info.data,
-  };
+   };
 };
     
 const LaptopProductsInterface = connect(mapStateToProps)(int_LaptopProductsInterface);

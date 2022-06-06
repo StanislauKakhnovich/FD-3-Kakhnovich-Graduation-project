@@ -16,6 +16,7 @@ class LaptopProduct extends React.PureComponent {
   };
 
   render() {
+    console.log("Product id="+this.props.info.id+" render");
     
     return (
       <div className='LaptopsContainer'>
