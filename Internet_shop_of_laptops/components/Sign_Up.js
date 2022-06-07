@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
+import $ from 'jquery'
 
 import './Sign_Up.css';
 
@@ -13,6 +14,9 @@ class Sign_Up extends React.PureComponent {
     Password: null,
     controlEmail: false,
     controlPassword: false,
+    formVisible: true,
+    controlLatinPassword: false,
+
 }
 
 NameAdd = (EO) => {
@@ -35,34 +39,76 @@ EmailAdd = (EO) => {
 
 PasswordAdd = (EO) => {
   this.setState( {Password:EO.target.value} );
-  EO.target.value.length < 4 ? this.setState( {controlPassword:false} ) : this.setState( {controlPassword:true});
+  EO.target.value.length < 6 ? this.setState( {controlPassword:false} ) : this.setState( {controlPassword:true});
+  /^(?=.*\d)(?=.*[A-Za-z])(?=.*[\_])[0-9a-zA-Z\_]{6,}$/.test(EO.target.value) ? this.setState( {controlLatinPassword:true} ) : this.setState( {controlLatinPassword:false});
 }
 
-
-
-saveChanged = () => {
-    if(this.state.newName&&this.state.newPrice&&this.state.newQuantity&&this.state.newURL&&!this.state.controlEmpty&&
-      !this.state.controlName&&!this.state.controlPrice&&!this.state.controlQuantity&&!this.state.controlURLLatin&&
-      !this.state.controlURLFormat) {
-      let objNewData = {
-          "nameProduct": this.state.newName, 
-          "code":this.props.code, 
-          "price":this.state.newPrice, 
-          "quantity":this.state.newQuantity, 
-          "imgURL":this.state.newURL,
-        };
-      this.props.cbSaved(objNewData, this.props.code);
-      this.props.cbBunButtonsEdit(true);
-      this.props.cbBunButtonsDeleteNew(true);
+postStoreInfo=()=> {
+  // updatePassword=Math.random();
+  if (this.state.Name&&this.state.Country&&this.state.Town&&
+    this.state.Email&&this.state.controlEmail&&this.state.Password&&this.state.controlPassword&&this.state.controlLatinPassword) {
+      let info={
+        name: this.state.Name,
+        country: this.state.Country,
+        town: this.state.Town,
+        email: this.state.Email,
+        password: this.state.Password,
+        basketProducts: []
+      }
+      $.ajax( {
+              url : "https://fe.it-academy.by/AjaxStringStorage2.php", type : 'POST', cache : false, dataType:'json',
+              data : { f : 'INSERT', n : this.state.Password, v : JSON.stringify(info)},
+              success : this.readReady, error : this.errorHandler
+          }
+      );
     }
 }
+
+
+  readReady = (callresult)=> {
+    if ( callresult.error!=undefined )
+        alert(callresult.error);
+    else if ( callresult.result!="" ) {
+      this.setState( {formVisible:false} );
+      }
+  };
+
+errorHandler = (jqXHR,statusStr,errorStr) => {
+    alert(statusStr+' '+errorStr);
+  }
+
+
+
+
+
+
+
+
+// saveChanged = () => {
+//     if(this.state.newName&&this.state.newPrice&&this.state.newQuantity&&this.state.newURL&&!this.state.controlEmpty&&
+//       !this.state.controlName&&!this.state.controlPrice&&!this.state.controlQuantity&&!this.state.controlURLLatin&&
+//       !this.state.controlURLFormat) {
+//       let objNewData = {
+//           "nameProduct": this.state.newName, 
+//           "code":this.props.code, 
+//           "price":this.state.newPrice, 
+//           "quantity":this.state.newQuantity, 
+//           "imgURL":this.state.newURL,
+//         };
+//       this.props.cbSaved(objNewData, this.props.code);
+//       this.props.cbBunButtonsEdit(true);
+//       this.props.cbBunButtonsDeleteNew(true);
+//     }
+// }
 
   render() {
 
     return (
       <div>
         <h1 className='NameCompany'>Интернет&ndash;магазин &laquo;Ноутбуки для всех&raquo;</h1>
-        <form  action="#" noValidate className='form-sign-up'>
+        {
+          this.state.formVisible&&
+        <div  action="#" noValidate className='form-sign-up'>
           <div className="clearfix">
               <label id="label-name" htmlFor="name">Ваше имя:</label>
               <div className="registration"><input  id="name" type="text" name="nameUser" onChange={this.NameAdd}></input>
@@ -112,15 +158,25 @@ saveChanged = () => {
                   }
                   {
                     !this.state.controlPassword&&
-                    <div className="ErrorValid">Введите не менее 4 знаков.</div>
+                    <div className="ErrorValid">Введите не менее 6 знаков.</div>
+                  }
+                  {
+                    !this.state.controlLatinPassword&&
+                    <div className="ErrorValid">Пароль должен содержать латинские буквы, цифры и нижние подчеркивания.</div>
                   }
               </div>
           </div>
           <button id="submit" type="submit" className={`${this.state.Name&&this.state.Country&&this.state.Town&&
-                      this.state.Email&&this.state.controlEmail&&this.state.Password&&this.state.controlPassword
+                      this.state.Email&&this.state.controlEmail&&this.state.Password&&this.state.controlPassword&&
+                      this.state.controlLatinPassword
                       ?'ButtonIn'
-                      :'ButtonOff'} ${'EditButtons'}`}>Зарегистрироваться</button>
-        </form>
+                      :'ButtonOff'} ${'EditButtons'}`} onClick={this.postStoreInfo} >Зарегистрироваться</button>
+        </div>
+        }
+        {
+          !this.state.formVisible&&
+          <h2 className='Registr'>Вы успешно прошли регистрацию.</h2>
+        }
       </div>
       
 

@@ -73,16 +73,7 @@ class int_LaptopProductsInterface extends React.PureComponent {
     else if (EO.target.value == 3){
       this.setState( {controlSort: 3})
     }
-    // if (EO.target.value == 2){
-    //   let arr=[...this.state.products];
-    //   arr=arr.sort(this.comparePrice);
-    //   this.setState( {products: arr});
-    //   console.log(1)
-    // }
-
   }
-
-
 
   choice = (EO) => {
       let arr=[...this.state.controls];
@@ -94,7 +85,6 @@ class int_LaptopProductsInterface extends React.PureComponent {
       if(EO.target.value>=27&&EO.target.value<=31) arr[5]=EO.target.value;
       this.setState( {controls:  arr});
   }
-
 
   filterClick =() =>{
 

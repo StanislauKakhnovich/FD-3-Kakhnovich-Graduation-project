@@ -1,5 +1,7 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
+import $ from 'jquery'
+
 
 class Sign_In extends React.PureComponent {
 
@@ -15,6 +17,7 @@ class Sign_In extends React.PureComponent {
     Password: null,
     controlEmail: false,
     controlPassword: false,
+    formVisible: true,
 }
 
 EmailAdd = (EO) => {
@@ -27,12 +30,41 @@ PasswordAdd = (EO) => {
   EO.target.value.length < 4 ? this.setState( {controlPassword:false} ) : this.setState( {controlPassword:true});
 }
 
+restoreInfo =()=> {
+  if (this.state.Email&&this.state.controlEmail&&this.state.Password&&this.state.controlPassword) {
+    $.ajax(
+      {
+          url : "https://fe.it-academy.by/AjaxStringStorage2.php", type : 'POST', cache : false, dataType:'json',
+          data : { f : 'READ', n : this.state.Password },
+          success : this.readReady, error : this.errorHandler
+      }
+  );
+  }
+
+}
+
+ readReady=(callresult)=> {
+  if ( callresult.error!=undefined )
+      alert(callresult.error);
+  else if ( callresult.result!="" ) {
+    this.setState( {formVisible:false} );
+      var info=JSON.parse(callresult.result);
+      console.log(info);
+  }
+}
+
+errorHandler=(jqXHR,statusStr,errorStr)=> {
+  alert(statusStr+' '+errorStr);
+}
+
   render() {
 
     return (
       <div>
         <h1 className='NameCompany'>Интернет&ndash;магазин &laquo;Ноутбуки для всех&raquo;</h1>
-        <form  action="#" noValidate className='form-sign-up'>
+        {
+          this.state.formVisible&&
+        <div  action="#" noValidate className='form-sign-up'>
           <div className="clearfix">
               <label id="label-e-mail-up" htmlFor="e-mail-up">Ваш e-mail:</label>
               <div className="registration"><input  id="e-mail-up" type="text" name="mail" onChange={this.EmailAdd}></input>
@@ -59,11 +91,16 @@ PasswordAdd = (EO) => {
                   }
               </div>
           </div>
-          <button id="submit" type="submit" className={`${this.state.Name&&this.state.Country&&this.state.Town&&
+          <button id="submit" type="submit" className={`${
                       this.state.Email&&this.state.controlEmail&&this.state.Password&&this.state.controlPassword
                       ?'ButtonIn'
-                      :'ButtonOff'} ${'EditButtons'}`}>Войти</button>
-        </form>
+                      :'ButtonOff'} ${'EditButtons'}`} onClick={this.restoreInfo}>Войти</button>
+        </div>
+        }
+        {
+          !this.state.formVisible&&
+          <h2 className='Registr'>Вы успешно вошли в свой аккаунт.</h2>
+        }
       </div>
     );
   }
