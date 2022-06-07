@@ -1,10 +1,11 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
-import $ from 'jquery'
+import $ from 'jquery';
+import {connect} from 'react-redux';
 
 import './Sign_Up.css';
 
-class Sign_Up extends React.PureComponent {
+class int_Sign_Up extends React.PureComponent {
 
   state = {
     Name: null,
@@ -70,36 +71,13 @@ postStoreInfo=()=> {
         alert(callresult.error);
     else if ( callresult.result!="" ) {
       this.setState( {formVisible:false} );
+      this.props.dispatch( { type:"SIGN_SUCCESS" } );
       }
   };
 
 errorHandler = (jqXHR,statusStr,errorStr) => {
     alert(statusStr+' '+errorStr);
   }
-
-
-
-
-
-
-
-
-// saveChanged = () => {
-//     if(this.state.newName&&this.state.newPrice&&this.state.newQuantity&&this.state.newURL&&!this.state.controlEmpty&&
-//       !this.state.controlName&&!this.state.controlPrice&&!this.state.controlQuantity&&!this.state.controlURLLatin&&
-//       !this.state.controlURLFormat) {
-//       let objNewData = {
-//           "nameProduct": this.state.newName, 
-//           "code":this.props.code, 
-//           "price":this.state.newPrice, 
-//           "quantity":this.state.newQuantity, 
-//           "imgURL":this.state.newURL,
-//         };
-//       this.props.cbSaved(objNewData, this.props.code);
-//       this.props.cbBunButtonsEdit(true);
-//       this.props.cbBunButtonsDeleteNew(true);
-//     }
-// }
 
   render() {
 
@@ -179,18 +157,17 @@ errorHandler = (jqXHR,statusStr,errorStr) => {
         }
       </div>
       
-
-                // <button className={`${this.state.newName&&this.state.newPrice&&this.state.newQuantity&&this.state.newURL&&
-                //     !this.state.controlEmpty&&!this.state.controlName&&!this.state.controlPrice&&!this.state.controlQuantity&&
-                //     !this.state.controlURLLatin&&!this.state.controlURLFormat
-                //     ?'ButtonIn'
-                //     :'ButtonOff'} ${'EditButtons'}`}  onClick={this.saveChanged} value>Сохранить
-                // </button>
-
-            //     <button className={`${'ButtonIn'} ${'EditButtons'}`} onClick={this.cancelChanged}>Отмена</button>
-            // </div>
     );
   }
 }
+
+const mapStateToProps = function (state) {
+  // этому компоненту ничего не нужно из хранилища Redux
+  return { }; 
+};
+
+// но этому компоненту нужен сам this.props.dispatch, и чтобы
+// он появился, следует присоединить (connect) компонент к хранилищу Redux
+const Sign_Up = connect(mapStateToProps)(int_Sign_Up);
 
 export default Sign_Up;

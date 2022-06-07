@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 
+
 import Page_Company from './Page_Company';
 import Page_Products from './Page_Products';
 import Page_Product from './Page_Product';
@@ -25,7 +26,7 @@ class PagesRouter extends React.Component {
           <Route path="/sign_in" element={<Page_Sign_In/>} />
           <Route path="/basket" element={<Page_Basket/>} />
           <Route path="/contacts" element={<Page_Contacts/>} />
-        </Routes>
+        </Routes>    
     );
   }
 }

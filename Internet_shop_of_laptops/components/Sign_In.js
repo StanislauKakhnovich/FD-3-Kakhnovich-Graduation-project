@@ -1,9 +1,10 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
-import $ from 'jquery'
+import $ from 'jquery';
+import {connect} from 'react-redux';
 
 
-class Sign_In extends React.PureComponent {
+class int_Sign_In extends React.PureComponent {
 
   static propTypes = {
     
@@ -50,12 +51,14 @@ restoreInfo =()=> {
     this.setState( {formVisible:false} );
       var info=JSON.parse(callresult.result);
       console.log(info);
+      this.props.dispatch( { type:"SIGN_SUCCESS" } );
   }
 }
 
 errorHandler=(jqXHR,statusStr,errorStr)=> {
   alert(statusStr+' '+errorStr);
 }
+
 
   render() {
 
@@ -105,5 +108,14 @@ errorHandler=(jqXHR,statusStr,errorStr)=> {
     );
   }
 }
+
+const mapStateToProps = function (state) {
+  // этому компоненту ничего не нужно из хранилища Redux
+  return { }; 
+};
+
+// но этому компоненту нужен сам this.props.dispatch, и чтобы
+// он появился, следует присоединить (connect) компонент к хранилищу Redux
+const Sign_In = connect(mapStateToProps)(int_Sign_In);
 
 export default Sign_In;

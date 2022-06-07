@@ -1,12 +1,14 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import './LaptopProduct.css';
 
-class LaptopProduct extends React.PureComponent {
+class int_LaptopProduct extends React.PureComponent {
 
   static propTypes = {
+    sign: PropTypes.bool.isRequired, // получено из Redux
     info:PropTypes.shape({
       id: PropTypes.number.isRequired,
       nameProduct: PropTypes.string.isRequired,
@@ -14,6 +16,10 @@ class LaptopProduct extends React.PureComponent {
       price: PropTypes.number.isRequired,
     }),
   };
+
+  addProductInBasket =()=> {
+    if(!this.props.sign) alert('Вы не зарегистрированы. Пройдите авторизацию или регистрацию.')
+  }
 
   render() {
     // console.log("Product id="+this.props.info.id+" render");
@@ -29,7 +35,7 @@ class LaptopProduct extends React.PureComponent {
             <div className='ProductDescription'>{this.props.info.description}</div>
           </div>
           <div className='ProductPrice'>{this.props.info.price.toFixed(2)} руб</div>
-            <button className='AddProductBasket'>В корзину</button>
+            <button className='AddProductBasket' onClick={this.addProductInBasket}>В корзину</button>
         </div>
       </div>
     );
@@ -37,5 +43,14 @@ class LaptopProduct extends React.PureComponent {
   }
 
 }
+
+
+const mapStateToProps = function (state) {
+  return {
+    sign: state.signIn.stateIn,
+   };
+};
+    
+const LaptopProduct = connect(mapStateToProps)(int_LaptopProduct);
 
 export default LaptopProduct;
