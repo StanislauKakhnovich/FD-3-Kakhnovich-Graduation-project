@@ -17,6 +17,7 @@ class int_Sign_Up extends React.PureComponent {
     controlPassword: false,
     formVisible: true,
     controlLatinPassword: false,
+    infoUser: null,
 
 }
 
@@ -56,6 +57,8 @@ postStoreInfo=()=> {
         password: this.state.Password,
         basketProducts: []
       }
+      this.setState( {infoUser:info} );
+      
       $.ajax( {
               url : "https://fe.it-academy.by/AjaxStringStorage2.php", type : 'POST', cache : false, dataType:'json',
               data : { f : 'INSERT', n : this.state.Password, v : JSON.stringify(info)},
@@ -72,6 +75,7 @@ postStoreInfo=()=> {
     else if ( callresult.result!="" ) {
       this.setState( {formVisible:false} );
       this.props.dispatch( { type:"SIGN_SUCCESS" } );
+      this.props.dispatch( { type:"PASSWORD_SUCCESS", infoReg: this.state.infoUser } );
       }
   };
 

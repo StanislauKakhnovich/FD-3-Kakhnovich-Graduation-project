@@ -52,6 +52,7 @@ restoreInfo =()=> {
       var info=JSON.parse(callresult.result);
       console.log(info);
       this.props.dispatch( { type:"SIGN_SUCCESS" } );
+      this.props.dispatch( { type:"PASSWORD_SUCCESS", infoReg: info } );
   }
 }
 
