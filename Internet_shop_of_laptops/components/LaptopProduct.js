@@ -9,6 +9,7 @@ class int_LaptopProduct extends React.PureComponent {
 
   static propTypes = {
     sign: PropTypes.bool.isRequired, // получено из Redux
+    user: PropTypes.object.isRequired, // получено из Redux
     info:PropTypes.shape({
       id: PropTypes.number.isRequired,
       nameProduct: PropTypes.string.isRequired,
@@ -18,7 +19,13 @@ class int_LaptopProduct extends React.PureComponent {
   };
 
   addProductInBasket =()=> {
-    if(!this.props.sign) alert('Вы не зарегистрированы. Пройдите авторизацию или регистрацию.')
+    if(!this.props.sign) alert('Вы не зарегистрированы. Пройдите авторизацию или регистрацию.');
+    console.log(this.props.user);
+
+    if(this.props.sign) {
+      this.props.dispatch( { type:"ADD_PRODUCT_TO_BASKET", addProdact: this.props.info } );
+    } 
+
   }
 
   render() {
@@ -48,6 +55,7 @@ class int_LaptopProduct extends React.PureComponent {
 const mapStateToProps = function (state) {
   return {
     sign: state.signIn.stateIn,
+    user: state.dataUser.infoUser,
    };
 };
     

@@ -41,7 +41,6 @@ restoreInfo =()=> {
       }
   );
   }
-
 }
 
  readReady=(callresult)=> {

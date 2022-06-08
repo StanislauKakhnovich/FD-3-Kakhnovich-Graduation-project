@@ -28,10 +28,9 @@ class int_PagesLinks extends React.Component {
         !this.props.sign&&
         <NavLink to="/sign_in" className={obj => ("PageLink"+(obj.isActive?" ActivePageLink":""))}>Войти</NavLink>
         }
-        { 
-        this.props.sign&&
+        
         <NavLink to="/basket" className={obj => ("PageLink"+(obj.isActive?" ActivePageLink":""))}>Корзина</NavLink>
-        }
+        
         
         <NavLink to="/contacts" className={obj => ("PageLink"+(obj.isActive?" ActivePageLink":""))}>Контакты</NavLink>
 
