@@ -1,5 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import $ from 'jquery';
 
 
 
@@ -13,9 +16,53 @@ import Page_Contacts from './Page_Contacts';
 
 
 
-class PagesRouter extends React.Component {
+class int_PagesRouter extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  static propTypes = {
+    products: PropTypes.array.isRequired, // получено из Redux
+   };
+  
+  state = {
+    dataReady: false,
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  loadData =()=> {
+     if (this.props.products.length==0) {
+      $.ajax(
+        {
+            url : "https://fe.it-academy.by/AjaxStringStorage2.php", type : 'POST', cache : false, dataType:'json',
+            data : { f : 'READ', n : 'KAKHNOVICH_FD3_DATABASE_LAPTOPS' },
+            success : this.readReady, error : this.errorHandler
+        }
+    );
+     }
+  }
+  
+   readReady=(callresult)=> {
+    if ( callresult.error!=undefined )
+        alert(callresult.error);
+    else if ( callresult.result!="" ) {
+      this.setState({dataReady:true});
+        var info=JSON.parse(callresult.result);
+        this.props.dispatch( { type:"DATABASE_SUCCESS", dataBase: info } );
+    }
+  }
+  
+  errorHandler=(jqXHR,statusStr,errorStr)=> {
+    alert(statusStr+' '+errorStr);
+  }
           
   render() {
+    if ( !this.state.dataReady )
+      return <div>загрузка данных...</div>;
 
     return (
         <Routes>
@@ -31,5 +78,15 @@ class PagesRouter extends React.Component {
   }
 }
     
+
+
+const mapStateToProps = function (state) {
+  return {
+    products: state.info.data,
+   }; 
+};
+
+const PagesRouter = connect(mapStateToProps)(int_PagesRouter);
+
 export default PagesRouter;
     

@@ -55,10 +55,7 @@ postStoreInfo=()=> {
         town: this.state.Town,
         email: this.state.Email,
         password: this.state.Password,
-        basketProducts: [
-          {"id":10,"nameProduct":"Apple Macbook Air 13 M1 2020 MGN63","description":"13.3\" 2560 x 1600 IPS, 60 Гц, несенсорный, Apple M1 3200 МГц, 8 ГБ, SSD 256 ГБ, встроенная, Mac OS, цвет крышки серый","price":3150,"screenTechnology":"IPS","processorModel":"Apple M1 3200 МГц","RAM":"8 ГБ","driveConfiguration":"SSD 256 ГБ","videoСard":"встроенная","OS":"Mac OS","appointment":"для работы, компактный, ультрабук"},
-    {"id":11,"nameProduct":"ASUS ROG Strix G15 G513IH-HN014","description":"15.6\" 1920 x 1080 IPS, 144 Гц, несенсорный, AMD Ryzen 7 4800H 2900 МГц, 16 ГБ DDR4, SSD 512 ГБ, видеокарта NVIDIA GeForce GTX 1650 4 ГБ GDDR6, без ОС, цвет крышки темно-серый","price":3149,"screenTechnology":"IPS","processorModel":"AMD Ryzen 7 4800H 2900 МГц","RAM":"16 ГБ DDR4","driveConfiguration":"SSD 512 ГБ","videoСard":"NVIDIA GeForce GTX 1650 4 ГБ GDDR6","OS":"без ОС","appointment":"игровой"},
-        ]
+        basketProducts: [],
       }
       this.setState( {infoUser:info} );
       

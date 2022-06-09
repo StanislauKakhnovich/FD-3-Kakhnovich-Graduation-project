@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import $ from 'jquery';
 
 
 import LaptopProducts from './LaptopProducts';
@@ -10,8 +11,10 @@ import './LaptopProductsInterface.css';
 
 class int_LaptopProductsInterface extends React.PureComponent {
 
+
+
   static propTypes = {
-    products: PropTypes.array.isRequired, // получено из Redux
+   products: PropTypes.array.isRequired, // получено из Redux
   };
   
   state = {
@@ -52,6 +55,7 @@ class int_LaptopProductsInterface extends React.PureComponent {
     }
 
   }
+
 
   filterSide = () => {
     this.setState( {filter:false} );
@@ -113,20 +117,12 @@ class int_LaptopProductsInterface extends React.PureComponent {
     this.setState( {controls:  arr, controlSort: 1, products: this.props.products});
   }
 
-
-
-
   render() {
-
-    console.log("LaptopProductsIntrface render");
-
+    
     return (
         <div className='ContainerProducts'>
           <div className='TopPanel'>
-            <button className='AllProduct'>Вывести весь список</button>
-            <button className='TenProduct'>Выводить по 10 товаров</button>
-            <button className='NextTenProduct'>Следующие 10 товаров</button>
-            <button className='Filters' onClick={this.filterSide}>Фильтры</button>
+            <button className='Filters' onClick={this.filterSide}>Открыть панель фильтров</button>
           </div>
           <div className={this.state.filter?'Hidden':'SidePanelFilters'}>
                 {
@@ -208,9 +204,6 @@ class int_LaptopProductsInterface extends React.PureComponent {
               
           </div>
           <LaptopProducts products={this.state.products}/>
-          <div className='BottomPanel'>
-            <button className='NextTenProduct'>Следующие 10 товаров</button>
-          </div>
         </div>
     );
   }

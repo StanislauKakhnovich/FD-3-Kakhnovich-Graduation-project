@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import Immutable from 'immutable';
+
 
 
 const initState={
@@ -25,17 +27,46 @@ const initState={
       }
 
       case "ADD_PRODUCT_TO_BASKET": {
-        // хотелось бы просто увеличить state.cnt
-        // но редьюсер ВСЕГДА должен возвращаеть новый state а не изменять старый!
 
         let newState={...state};
-        // action.addProdact
         newState.infoUser={...newState.infoUser, basketProducts:[...newState.infoUser.basketProducts,action.addProdact]}
-        // newState.infoUser.basketProducts= ;
         storeInfo(newState);
-        // console.log(newState);
         return newState;
       }
+
+      case "INC": {
+        // let newState={...state, ...state.infoUser, ...state.infoUser.basketProducts};
+        // var x = Immutable(state);
+        // var newState = x.setIn([infoUser, basketProducts[action.incProduct.id], quantity], quantity++)
+        // let newState=Object.assign(state);
+        let newState = JSON.parse(JSON.stringify(state))
+        console.log(newState);
+        console.log(newState==state);
+        
+        // let obj = {...newState.infoUser, basketProducts:[...newState.infoUser.basketProducts]}
+         let arr = newState.infoUser.basketProducts;
+        // let arr = Object.values(Object.assign({},newState.infoUser.basketProducts));
+        
+        // console.log(arr);
+
+        arr.map(elem=>{
+          if(elem.id==action.incProduct.id) elem=elem.quantity++
+        })
+         newState.infoUser.basketProducts=arr;
+
+        // newState={...newState, newState.infoUser}
+        // newState={...newState.infoUser, basketProducts:[...newState.infoUser.basketProducts]}
+        // var hash1=Immutable.Map(state);
+        // var newState=hash1.set(state.infoUser.basketProducts,arr); // вернётся НОВЫЙ Map (хэш)
+
+        
+        // console.log(newState);
+        // console.log(newState==state);
+        
+        storeInfo(newState);
+        return newState;
+      }
+
     
       default:
         return state;

@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 
 import LaptopProduct from './LaptopProduct';
 
@@ -14,12 +13,16 @@ class LaptopProducts extends React.PureComponent {
   state = {
 
   }
+
   
   render() {
     // console.log(this.props.products);
-    var productsCode=this.props.products.map( product =>
-      <LaptopProduct key={product.id} info={product}  />
-    );
+    if (this.props.products) {
+      var productsCode=this.props.products.map( product =>
+        <LaptopProduct key={product.id} info={product}  />
+      );
+    }
+    
     return (
           <div className='LaptopProducts'>
             {productsCode}
@@ -32,6 +35,13 @@ class LaptopProducts extends React.PureComponent {
 //   return {
     
 //   };
+// };
+    
+// const LaptopProducts = connect(mapStateToProps)(int_LaptopProducts);
+
+
+// const mapStateToProps = function (state) {
+//   return { };
 // };
     
 // const LaptopProducts = connect(mapStateToProps)(int_LaptopProducts);

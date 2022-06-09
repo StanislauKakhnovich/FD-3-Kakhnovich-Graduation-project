@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import './BasketProduct.css';
 
-class BasketProduct extends React.PureComponent {
+class int_BasketProduct extends React.PureComponent {
 
   static propTypes = {
     info:PropTypes.shape({
@@ -12,10 +13,25 @@ class BasketProduct extends React.PureComponent {
       nameProduct: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
+      quantity: PropTypes.number.isRequired,
     }),
   };
 
+  state = {
+    quantity: this.props.info.quantity,
+  }
+
+  incCounter = () => {
+    this.props.dispatch( { type:"INC", incProduct: {...this.props.info} } );
+    this.setState({quantity: this.state.quantity++})
+  }
+
+  decCounter = () => {
+    this.props.dispatch( { type:"DEC" } );
+  }
+
   render() {
+    console.log("render BasketProduct")
     
     return (
       <div className='LaptopsContainer'>
@@ -30,8 +46,7 @@ class BasketProduct extends React.PureComponent {
           <button className='DeleteProductBasket'>Удалить</button>
           <div className="CounterButton">
             <input type='button' value='-' onClick={this.decCounter} />
-            {/* <span className="CounterButtonValue">{counterValue}</span> */}
-            <span className="CounterButtonValue">{0}</span>
+            <span className="CounterButtonValue">{this.state.quantity}</span>
             <input type='button' value='+' onClick={this.incCounter} />
             </div>
           <div className='ProductPrice'>{this.props.info.price.toFixed(2)} руб</div>
@@ -42,5 +57,15 @@ class BasketProduct extends React.PureComponent {
   }
 
 }
+
+
+const mapStateToProps = function (state) {
+  // этому компоненту ничего не нужно из хранилища Redux
+  return { }; 
+};
+
+// но этому компоненту нужен сам this.props.dispatch, и чтобы
+// он появился, следует присоединить (connect) компонент к хранилищу Redux
+const BasketProduct = connect(mapStateToProps)(int_BasketProduct);
 
 export default BasketProduct;

@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import $ from 'jquery';
 
 import LaptopProductsInterface from '../components/LaptopProductsInterface';
 
 class Page_Products extends React.PureComponent {
-          
+       
   render() {
     return (
       <div>

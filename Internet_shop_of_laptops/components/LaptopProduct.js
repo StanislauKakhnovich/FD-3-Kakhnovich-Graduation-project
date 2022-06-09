@@ -20,12 +20,10 @@ class int_LaptopProduct extends React.PureComponent {
 
   addProductInBasket =()=> {
     if(!this.props.sign) alert('Вы не зарегистрированы. Пройдите авторизацию или регистрацию.');
-    console.log(this.props.user);
 
     if(this.props.sign) {
       this.props.dispatch( { type:"ADD_PRODUCT_TO_BASKET", addProdact: this.props.info } );
     } 
-
   }
 
   render() {

@@ -9,14 +9,17 @@
 }
 .TopPanel,
 .BottomPanel {
-  text-align: center;
+  text-align: right;
 }
 .AllProduct,
 .TenProduct,
-.NextTenProduct,
-.Filters{
+.NextTenProduct{
   margin: 10px;
   min-width: 167px;
+}
+.Filters{
+  margin-right: 20px;
+  min-width: 216px;
 }
 select {
   margin: 5px;
@@ -63,9 +66,13 @@ select {
   .SidePanelFilters {
     right: 10px;
   }
+
 }
 @media only screen and (max-width: 350px) {
   .SidePanelFilters {
     right: 5px;
+  }
+  .Filters {
+    margin-right: 5px;
   }
 }

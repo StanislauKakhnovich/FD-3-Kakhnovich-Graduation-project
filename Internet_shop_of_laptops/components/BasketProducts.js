@@ -20,6 +20,8 @@ class int_BasketProducts extends React.PureComponent {
     selectedItem: this.props.user.infoUser.basketProducts,
   }
 
+
+
   // restoreInfo =()=> {
   //     $.ajax(
   //       {
@@ -45,9 +47,11 @@ class int_BasketProducts extends React.PureComponent {
   // }
 
   render() {
+    console.log("render BasketProducts")
     // console.log(this.props.user.infoUser.basketProducts)
     if(this.props.sign) {
-      let arr = [...this.state.selectedItem]
+
+       let arr = JSON.parse(JSON.stringify(this.state.selectedItem)) ;
       var productsSelected=arr.map( product =>
         <BasketProduct key={product.id} info={product}  />
       );
@@ -62,9 +66,13 @@ class int_BasketProducts extends React.PureComponent {
         this.props.sign&&
         <div>
         <div className='Basket'>Корзина</div>
-        <div className='Total'>{this.state.quantity} товар на сумму {this.state.sum} рублей.</div>
+        {/* <div className='Total'>{this.state.quantity} товар на сумму {this.state.sum} рублей.</div> */}
         <div className='LaptopProducts'>{productsSelected}</div>
         </div>
+        }
+        {
+          this.state.selectedItem == 0 &&
+          <h2 className='Registr'>Ваша корзина пуста.</h2>
         }
         {
           !this.props.sign&&
