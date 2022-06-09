@@ -17,21 +17,21 @@ class int_BasketProduct extends React.PureComponent {
     }),
   };
 
-  state = {
-    quantity: this.props.info.quantity,
-  }
 
   incCounter = () => {
     this.props.dispatch( { type:"INC", incProduct: {...this.props.info} } );
-    this.setState({quantity: this.state.quantity++})
   }
 
   decCounter = () => {
-    this.props.dispatch( { type:"DEC" } );
+    if(this.props.info.quantity>0) this.props.dispatch( { type:"DEC", decProduct: {...this.props.info} } );
   }
 
+  deletePosition = () => {
+    this.props.dispatch( { type:"DELETE", deleteProduct: {...this.props.info} } );
+  }
+
+
   render() {
-    console.log("render BasketProduct")
     
     return (
       <div className='LaptopsContainer'>
@@ -43,12 +43,12 @@ class int_BasketProduct extends React.PureComponent {
             <NavLink to={"/product/"+this.props.info.id} className="NameProduct">Ноутбук {this.props.info.nameProduct}</NavLink>
             <div className='ProductDescription'>{this.props.info.description}</div>
           </div>
-          <button className='DeleteProductBasket'>Удалить</button>
+          <button className='DeleteProductBasket' onClick={this.deletePosition}>Удалить</button>
           <div className="CounterButton">
             <input type='button' value='-' onClick={this.decCounter} />
-            <span className="CounterButtonValue">{this.state.quantity}</span>
-            <input type='button' value='+' onClick={this.incCounter} />
-            </div>
+            <span className="CounterButtonValue">{this.props.info.quantity}</span>
+          <input type='button' value='+' onClick={this.incCounter} />
+          </div>
           <div className='ProductPrice'>{this.props.info.price.toFixed(2)} руб</div>
         </div>
       </div>
@@ -60,12 +60,9 @@ class int_BasketProduct extends React.PureComponent {
 
 
 const mapStateToProps = function (state) {
-  // этому компоненту ничего не нужно из хранилища Redux
   return { }; 
 };
 
-// но этому компоненту нужен сам this.props.dispatch, и чтобы
-// он появился, следует присоединить (connect) компонент к хранилищу Redux
 const BasketProduct = connect(mapStateToProps)(int_BasketProduct);
 
 export default BasketProduct;

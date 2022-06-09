@@ -1,25 +1,15 @@
 import $ from 'jquery';
 import Immutable from 'immutable';
 
-
-
 const initState={
     infoUser: {},
   };
   
-  // в редьюсере state - это не весь state Redux, а только тот раздел state,
-  // за который отвечает данный редьюсер
-
-
-
 
   function infoUserReducer(state=initState,action) {
       switch (action.type) {
   
       case "PASSWORD_SUCCESS": {
-        // хотелось бы просто увеличить state.cnt
-        // но редьюсер ВСЕГДА должен возвращаеть новый state а не изменять старый!
-
         let newState={...state};
         newState.infoUser=action.infoReg;
         console.log(newState);
@@ -35,34 +25,35 @@ const initState={
       }
 
       case "INC": {
-        // let newState={...state, ...state.infoUser, ...state.infoUser.basketProducts};
-        // var x = Immutable(state);
-        // var newState = x.setIn([infoUser, basketProducts[action.incProduct.id], quantity], quantity++)
-        // let newState=Object.assign(state);
         let newState = JSON.parse(JSON.stringify(state))
-        console.log(newState);
-        console.log(newState==state);
-        
-        // let obj = {...newState.infoUser, basketProducts:[...newState.infoUser.basketProducts]}
-         let arr = newState.infoUser.basketProducts;
-        // let arr = Object.values(Object.assign({},newState.infoUser.basketProducts));
-        
-        // console.log(arr);
-
+        let arr = newState.infoUser.basketProducts;
         arr.map(elem=>{
           if(elem.id==action.incProduct.id) elem=elem.quantity++
         })
          newState.infoUser.basketProducts=arr;
+        storeInfo(newState);
+        return newState;
+      }
 
-        // newState={...newState, newState.infoUser}
-        // newState={...newState.infoUser, basketProducts:[...newState.infoUser.basketProducts]}
-        // var hash1=Immutable.Map(state);
-        // var newState=hash1.set(state.infoUser.basketProducts,arr); // вернётся НОВЫЙ Map (хэш)
+      case "DEC": {
+        let newState = JSON.parse(JSON.stringify(state))
+        let arr = newState.infoUser.basketProducts;
+        arr.map(elem=>{
+          if(elem.id==action.decProduct.id) elem=elem.quantity--
+        })
+         newState.infoUser.basketProducts=arr;
+        storeInfo(newState);
+        return newState;
+      }
 
-        
-        // console.log(newState);
-        // console.log(newState==state);
-        
+      case "DELETE": {
+        let newState = JSON.parse(JSON.stringify(state))
+        let arr = newState.infoUser.basketProducts;
+        arr=arr.filter(elem=>{
+         return elem.id!=action.deleteProduct.id
+        })
+        console.log(arr);
+         newState.infoUser.basketProducts=arr;
         storeInfo(newState);
         return newState;
       }

@@ -6,17 +6,9 @@ import LaptopProduct from './LaptopProduct';
 
 class LaptopProducts extends React.PureComponent {
 
-  static propTypes = {
-    // products: PropTypes.array.isRequired, // получено из Redux
-  };
-  
-  state = {
-
-  }
-
   
   render() {
-    // console.log(this.props.products);
+
     if (this.props.products) {
       var productsCode=this.props.products.map( product =>
         <LaptopProduct key={product.id} info={product}  />
@@ -30,21 +22,6 @@ class LaptopProducts extends React.PureComponent {
     );
   }
 }
-
-// const mapStateToProps = function (state) {
-//   return {
-    
-//   };
-// };
-    
-// const LaptopProducts = connect(mapStateToProps)(int_LaptopProducts);
-
-
-// const mapStateToProps = function (state) {
-//   return { };
-// };
-    
-// const LaptopProducts = connect(mapStateToProps)(int_LaptopProducts);
 
 export default LaptopProducts;
 

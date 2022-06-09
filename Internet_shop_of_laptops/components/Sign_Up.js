@@ -173,12 +173,9 @@ errorHandler = (jqXHR,statusStr,errorStr) => {
 }
 
 const mapStateToProps = function (state) {
-  // этому компоненту ничего не нужно из хранилища Redux
   return { }; 
 };
 
-// но этому компоненту нужен сам this.props.dispatch, и чтобы
-// он появился, следует присоединить (connect) компонент к хранилищу Redux
 const Sign_Up = connect(mapStateToProps)(int_Sign_Up);
 
 export default Sign_Up;

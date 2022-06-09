@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+
 import $ from 'jquery';
 
 import BasketProduct from './BasketProduct';
@@ -15,46 +16,19 @@ class int_BasketProducts extends React.PureComponent {
 
 
   state = {
-    quantity: 1,
-    sum: 1000,
-    selectedItem: this.props.user.infoUser.basketProducts,
+    selectedItem: this.props.user,
   }
 
-
-
-  // restoreInfo =()=> {
-  //     $.ajax(
-  //       {
-  //           url : "https://fe.it-academy.by/AjaxStringStorage2.php", type : 'POST', cache : false, dataType:'json',
-  //           data : { f : 'READ', n : this.props.user.Password },
-  //           success : this.readReady, error : this.errorHandler
-  //       }
-  //   );
-  // }
-  
-  //  readReady=(callresult)=> {
-  //   if ( callresult.error!=undefined )
-  //       alert(callresult.error);
-  //   else if ( callresult.result!="" ) {
-  //       var info=JSON.parse(callresult.result);
-  //       console.log(info);
-  //       this.setState( {selectedItem:info.BasketProducts} );
-  //   }
-  // }
-  
-  // errorHandler=(jqXHR,statusStr,errorStr)=> {
-  //   alert(statusStr+' '+errorStr);
-  // }
-
   render() {
-    console.log("render BasketProducts")
-    // console.log(this.props.user.infoUser.basketProducts)
-    if(this.props.sign) {
 
-       let arr = JSON.parse(JSON.stringify(this.state.selectedItem)) ;
+    if(this.props.sign) {
+       let arr = JSON.parse(JSON.stringify(this.props.user.infoUser.basketProducts)) ;
       var productsSelected=arr.map( product =>
         <BasketProduct key={product.id} info={product}  />
       );
+      var controlLength=arr.length;
+      var qty = arr.reduce((sum, elem)=>sum+elem.quantity, 0);
+      var sum = arr.reduce((sum, elem) =>sum+elem.quantity*elem.price,0);
     }
 
   
@@ -66,12 +40,15 @@ class int_BasketProducts extends React.PureComponent {
         this.props.sign&&
         <div>
         <div className='Basket'>Корзина</div>
-        {/* <div className='Total'>{this.state.quantity} товар на сумму {this.state.sum} рублей.</div> */}
+        {
+          !controlLength==0&&
+          <div className='Total'>В вашей корзине {qty} товаров на сумму {sum} рублей.</div>
+        }
         <div className='LaptopProducts'>{productsSelected}</div>
         </div>
         }
         {
-          this.state.selectedItem == 0 &&
+          controlLength==0&&
           <h2 className='Registr'>Ваша корзина пуста.</h2>
         }
         {

@@ -1,7 +1,3 @@
-import $ from 'jquery';
-// import productsArr from '../data/data.json';
-
-
 
 const initState={
     data: [],
@@ -16,7 +12,6 @@ const initState={
         newState.data=action.dataBase;
         return newState;
       }
-  
   
       default:
         return state;

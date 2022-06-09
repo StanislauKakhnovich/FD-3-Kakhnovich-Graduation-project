@@ -1,29 +1,26 @@
 import React from 'react';
 import {useParams} from "react-router-dom";
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import LaptopProductInfo from '../components/LaptopProductInfo';
 
-import productsArr from '../data/data.json';
-
-// react-router v6 предоставляет возможности доступа к параметрам из УРЛа только в виде хуков, т.е. для функциональных компонентов
-// эта HOF делает возможным использование этого react-router и с классовыми компонентами
 const withRouter = Component => props => {
   const params = useParams();
   return <Component {...props} params={params} /> ;
 };
 
-class Page_Product extends React.PureComponent {
+class int_Page_Product extends React.PureComponent {
+
+  static propTypes = {
+    products: PropTypes.array.isRequired, // получено из Redux
+  };
           
   render() {
-
-    //console.log(this.props);
-
-    // раз написано <Route path="/client/:clid" element={<Page_Client/>} />
-    // значит withRouter(Page_Client) получит то что в УРЛе после /client/ под именем props.params.clid в виде строки
-    
+  
     let productId=parseInt(this.props.params.prid);
 
-    let productData=productsArr.find( product => product.id==productId );
+    let productData=this.props.products.find( product => product.id==productId );
 
     return (
       <div>
@@ -37,4 +34,14 @@ class Page_Product extends React.PureComponent {
 
 }
     
+
+
+const mapStateToProps = function (state) {
+  return {
+    products: state.info.data,
+   };
+};
+    
+const Page_Product = connect(mapStateToProps)(int_Page_Product);
+
 export default withRouter(Page_Product);

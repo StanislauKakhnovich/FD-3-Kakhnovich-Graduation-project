@@ -52,7 +52,6 @@ restoreInfo =()=> {
     this.setState({dataReady:true});
     this.setState( {formVisible:false} );
       var info=JSON.parse(callresult.result);
-      // console.log(info);
       this.props.dispatch( { type:"SIGN_SUCCESS" } );
       this.props.dispatch( { type:"PASSWORD_SUCCESS", infoReg: info } );
   }
@@ -118,12 +117,9 @@ errorHandler=(jqXHR,statusStr,errorStr)=> {
 }
 
 const mapStateToProps = function (state) {
-  // этому компоненту ничего не нужно из хранилища Redux
   return { }; 
 };
 
-// но этому компоненту нужен сам this.props.dispatch, и чтобы
-// он появился, следует присоединить (connect) компонент к хранилищу Redux
 const Sign_In = connect(mapStateToProps)(int_Sign_In);
 
 export default Sign_In;
