@@ -11,7 +11,6 @@ import infoUserReducer from "./components/infoUserReducer";
 
 import PagesRouter from './pages/PagesRouter';
 import PagesLinks from './pages/PagesLinks';
-import Footer from './pages/Footer';
 
 let combinedReducer=combineReducers({
   // редьюсер counterReducer отвечает за раздел state под именем counter
@@ -28,7 +27,6 @@ ReactDOM.render(
     <div>
       <PagesLinks/>
       <PagesRouter/>
-      <Footer/>
     </div>
   </BrowserRouter>
   </Provider>

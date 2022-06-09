@@ -8,6 +8,7 @@ import './Sign_Up.css';
 class int_Sign_Up extends React.PureComponent {
 
   state = {
+    dataReady: true,
     Name: null,
     Country: null,
     Town: null,
@@ -46,7 +47,7 @@ PasswordAdd = (EO) => {
 }
 
 postStoreInfo=()=> {
-  // updatePassword=Math.random();
+  this.setState({dataReady:false});
   if (this.state.Name&&this.state.Country&&this.state.Town&&
     this.state.Email&&this.state.controlEmail&&this.state.Password&&this.state.controlPassword&&this.state.controlLatinPassword) {
       let info={
@@ -73,6 +74,7 @@ postStoreInfo=()=> {
     if ( callresult.error!=undefined )
         alert(callresult.error);
     else if ( callresult.result!="" ) {
+      this.setState({dataReady:true});
       this.setState( {formVisible:false} );
       this.props.dispatch( { type:"SIGN_SUCCESS" } );
       this.props.dispatch( { type:"PASSWORD_SUCCESS", infoReg: this.state.infoUser } );
@@ -84,6 +86,11 @@ errorHandler = (jqXHR,statusStr,errorStr) => {
   }
 
   render() {
+
+    if ( !this.state.dataReady )
+    return <div id="preloader" className="hidden" aria-busy='true' aria-label='Загрузка данных, пожалуйста подождите.' role={'progressbar'}>
+      <img className="LaptopPreloader" src={`../images/Apple_MacBook_Pro_16_2019_MVVJ2.jpeg`} title="Laptop"></img>
+      </div>
 
     return (
       <div>

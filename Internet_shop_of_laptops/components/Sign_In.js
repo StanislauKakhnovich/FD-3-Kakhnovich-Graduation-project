@@ -11,6 +11,7 @@ class int_Sign_In extends React.PureComponent {
   };
 
   state = {
+    dataReady: true,
     Name: null,
     Country: null,
     Town: null,
@@ -32,6 +33,7 @@ PasswordAdd = (EO) => {
 }
 
 restoreInfo =()=> {
+  this.setState({dataReady:false});
   if (this.state.Email&&this.state.controlEmail&&this.state.Password&&this.state.controlPassword) {
     $.ajax(
       {
@@ -47,9 +49,10 @@ restoreInfo =()=> {
   if ( callresult.error!=undefined )
       alert(callresult.error);
   else if ( callresult.result!="" ) {
+    this.setState({dataReady:true});
     this.setState( {formVisible:false} );
       var info=JSON.parse(callresult.result);
-      console.log(info);
+      // console.log(info);
       this.props.dispatch( { type:"SIGN_SUCCESS" } );
       this.props.dispatch( { type:"PASSWORD_SUCCESS", infoReg: info } );
   }
@@ -61,6 +64,11 @@ errorHandler=(jqXHR,statusStr,errorStr)=> {
 
 
   render() {
+
+    if ( !this.state.dataReady )
+    return <div id="preloader" className="hidden" aria-busy='true' aria-label='Загрузка данных, пожалуйста подождите.' role={'progressbar'}>
+      <img className="LaptopPreloader" src={`../images/Apple_MacBook_Pro_16_2019_MVVJ2.jpeg`} title="Laptop"></img>
+      </div>
 
     return (
       <div>

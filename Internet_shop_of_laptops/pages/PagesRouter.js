@@ -14,6 +14,8 @@ import Page_Sign_In from './Page_Sign_In';
 import Page_Basket from './Page_Basket';
 import Page_Contacts from './Page_Contacts';
 
+import './PagesRouter.css';
+
 
 
 class int_PagesRouter extends React.Component {
@@ -62,7 +64,10 @@ class int_PagesRouter extends React.Component {
           
   render() {
     if ( !this.state.dataReady )
-      return <div>загрузка данных...</div>;
+      return <div id="preloader" className="hidden" aria-busy='true' aria-label='Загрузка данных, пожалуйста подождите.' role={'progressbar'}>
+        <img className="LaptopPreloader" src={`../images/Apple_MacBook_Pro_16_2019_MVVJ2.jpeg`} title="Laptop"></img>
+        </div>
+      
 
     return (
         <Routes>
