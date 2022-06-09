@@ -18,10 +18,15 @@ class int_LaptopProduct extends React.PureComponent {
     }),
   };
 
+  state={
+    limiter: false,
+  }
+
   addProductInBasket =()=> {
     if(!this.props.sign) alert('Вы не зарегистрированы. Пройдите авторизацию или регистрацию.');
 
-    if(this.props.sign) {
+    if(this.props.sign&&!this.state.limiter) {
+      this.setState({limiter:true});
       this.props.dispatch( { type:"ADD_PRODUCT_TO_BASKET", addProdact: this.props.info } );
     } 
   }

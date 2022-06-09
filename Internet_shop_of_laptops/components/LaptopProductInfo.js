@@ -1,17 +1,34 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import './LaptopProductInfo.css';
 
-class LaptopProductInfo extends React.PureComponent {
+class int_LaptopProductInfo extends React.PureComponent {
 
   static propTypes = {
+    
+    sign: PropTypes.bool.isRequired, // получено из Redux
     info:PropTypes.shape({
       nameProduct: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
     }),
   };
+
+  state={
+    limiter: false,
+  }
+
+  addProductInBasket =()=> {
+    if(!this.props.sign) alert('Вы не зарегистрированы. Пройдите авторизацию или регистрацию.');
+
+    if(this.props.sign&&!this.state.limiter) {
+      this.setState({limiter:true});
+      this.props.dispatch( { type:"ADD_PRODUCT_TO_BASKET", addProdact: this.props.info } );
+    } 
+  }
+
 
   render() {
 
@@ -33,12 +50,21 @@ class LaptopProductInfo extends React.PureComponent {
             <div className='DetailedInfoProduct'>Операционная система: {this.props.info.OS}</div>
             <div className='DetailedInfoProduct'>Назначение: {this.props.info.appointment}</div>
             <div className='ProductPriceInfo'>{this.props.info.price.toFixed(2)} руб</div>
-            <button className='AddProductBasketInfo'>В корзину</button>
+            <button className='AddProductBasketInfo' onClick={this.addProductInBasket}>В корзину</button>
           </div>
         </div>
       </div>
     );
   }
 }
+
+
+const mapStateToProps = function (state) {
+  return {
+    sign: state.signIn.stateIn,
+   };
+};
+    
+const LaptopProductInfo = connect(mapStateToProps)(int_LaptopProductInfo);
 
 export default LaptopProductInfo;
