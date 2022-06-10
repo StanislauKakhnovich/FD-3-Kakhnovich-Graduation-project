@@ -20,19 +20,41 @@ class int_LaptopProduct extends React.PureComponent {
 
   state={
     limiter: false,
+    quantity: 0,
   }
 
+  incCounter = (EO) => {
+    console.log(this.props.info.id)
+    if(!this.props.sign) alert('Вы не зарегистрированы. Пройдите авторизацию или регистрацию.');
+    if(this.props.sign) this.props.dispatch( { type:"INC_PRODUCT", incProduct: {...this.props.info} } );
+  }
+
+  decCounter = () => {
+    if(!this.props.sign) alert('Вы не зарегистрированы. Пройдите авторизацию или регистрацию.');
+    if(this.props.sign&&this.state.quantity) this.props.dispatch( { type:"DEC_PRODUCT", decProduct: {...this.props.info} } );
+  }
+  // &&this.props.info.quantity-1>0
   addProductInBasket =()=> {
     if(!this.props.sign) alert('Вы не зарегистрированы. Пройдите авторизацию или регистрацию.');
-
     if(this.props.sign&&!this.state.limiter) {
       this.setState({limiter:true});
       this.props.dispatch( { type:"ADD_PRODUCT_TO_BASKET", addProdact: this.props.info } );
     } 
   }
+  // componentWillMount(){
+
+  // }
 
   render() {
-    // console.log("Product id="+this.props.info.id+" render");
+    console.log('render');
+    
+    if(this.props.sign) {
+      let arr = JSON.parse(JSON.stringify(this.props.user.basketProducts)); //this.props.user.basketProducts;
+      arr.forEach(elem=>{
+        if(elem.id==this.props.info.id)  this.setState({quantity:elem.quantity});//qty=this.props.info.quantity;
+      })
+      }
+
     
     return (
       <div className='LaptopsContainer'>
@@ -45,7 +67,13 @@ class int_LaptopProduct extends React.PureComponent {
             <div className='ProductDescription'>{this.props.info.description}</div>
           </div>
           <div className='ProductPrice'>{this.props.info.price.toFixed(2)} руб</div>
-            <button className='AddProductBasket' onClick={this.addProductInBasket}>В корзину</button>
+            {/* <button className='AddProductBasket' onClick={this.addProductInBasket}>В корзину</button> */}
+            <span className="PutBusket">добавить в корзину</span>
+            <div className="CounterButton">
+            <input type='button' value='-' onClick={this.decCounter} />
+            <span className="CounterButtonValue">{this.state.quantity}</span>
+            <input type='button' value='+' onClick={this.incCounter} />
+          </div>
         </div>
       </div>
     );

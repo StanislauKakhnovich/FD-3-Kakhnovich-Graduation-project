@@ -13,11 +13,9 @@ import PagesRouter from './pages/PagesRouter';
 import PagesLinks from './pages/PagesLinks';
 
 let combinedReducer=combineReducers({
-  // редьюсер counterReducer отвечает за раздел state под именем counter
   info: dataReducer, 
   signIn: signInReducer,
   dataUser: infoUserReducer
-  // + другие редьюсеры
 });
 let store=createStore(combinedReducer);
 

@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import Immutable from 'immutable';
+
 
 const initState={
     infoUser: {},
@@ -23,6 +23,41 @@ const initState={
         storeInfo(newState);
         return newState;
       }
+
+      case "INC_PRODUCT": {
+        let newState = JSON.parse(JSON.stringify(state))
+        let arr = newState.infoUser.basketProducts;
+        if(arr.length==0) arr.push(action.incProduct);
+        else {
+          if(arr.every(elem=>elem.id!=action.incProduct.id)) arr.push(action.incProduct);
+          else {
+            for(let i=0; i<arr.length; i++){
+              if(arr[i].id==action.incProduct.id) {
+                arr[i].quantity++;
+                 break;
+              } 
+            }
+          }
+        }
+         newState.infoUser.basketProducts=arr;
+        storeInfo(newState);
+        return newState;
+      }
+      case "DEC_PRODUCT": {
+        let newState = JSON.parse(JSON.stringify(state))
+        let arr = newState.infoUser.basketProducts;
+            for(let i=0; i<arr.length; i++){
+              if(arr[i].id==action.decProduct.id) {
+                arr[i].quantity--;
+                 break;
+              } 
+            }
+            console.log(arr)
+        newState.infoUser.basketProducts=arr;
+        storeInfo(newState);
+        return newState;
+      }
+
 
       case "INC": {
         let newState = JSON.parse(JSON.stringify(state))

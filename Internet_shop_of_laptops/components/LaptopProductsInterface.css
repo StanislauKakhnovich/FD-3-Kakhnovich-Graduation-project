@@ -9,7 +9,7 @@
 }
 .TopPanel,
 .BottomPanel {
-  text-align: right;
+  text-align: left;
 }
 .AllProduct,
 .TenProduct,
@@ -18,7 +18,7 @@
   min-width: 167px;
 }
 .Filters{
-  margin-right: 20px;
+  margin-left: 20px;
   min-width: 216px;
 }
 select {
@@ -50,7 +50,7 @@ select {
 .SidePanelFilters {
   display: block;
   position: absolute;
-  right: 20px;
+  left: 20px;
   background-color: rgba(255, 166, 0, 0.895);
   padding: 10px;
 }
@@ -64,15 +64,18 @@ select {
 
 @media only screen and (max-width: 600px) {
   .SidePanelFilters {
-    right: 10px;
+    left: 10px;
+  }
+  .Filters {
+    margin-left: 10px;
   }
 
 }
 @media only screen and (max-width: 350px) {
   .SidePanelFilters {
-    right: 5px;
+    left: 5px;
   }
   .Filters {
-    margin-right: 5px;
+    margin-left: 5px;
   }
 }

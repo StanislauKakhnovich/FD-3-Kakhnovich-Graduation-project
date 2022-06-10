@@ -47,7 +47,7 @@ class int_BasketProduct extends React.PureComponent {
           <div className="CounterButton">
             <input type='button' value='-' onClick={this.decCounter} />
             <span className="CounterButtonValue">{this.props.info.quantity}</span>
-          <input type='button' value='+' onClick={this.incCounter} />
+            <input type='button' value='+' onClick={this.incCounter} />
           </div>
           <div className='ProductPrice'>{this.props.info.price.toFixed(2)} руб</div>
         </div>
