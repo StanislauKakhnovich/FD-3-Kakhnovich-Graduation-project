@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import $ from 'jquery';
 
-
-
 import Page_Company from './Page_Company';
 import Page_Products from './Page_Products';
 import Page_Product from './Page_Product';
@@ -15,7 +13,6 @@ import Page_Basket from './Page_Basket';
 import Page_Contacts from './Page_Contacts';
 
 import './PagesRouter.css';
-
 
 
 class int_PagesRouter extends React.Component {

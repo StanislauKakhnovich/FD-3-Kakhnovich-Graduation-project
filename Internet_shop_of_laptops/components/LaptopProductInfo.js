@@ -7,9 +7,10 @@ import './LaptopProductInfo.css';
 class int_LaptopProductInfo extends React.PureComponent {
 
   static propTypes = {
-    
     sign: PropTypes.bool.isRequired, // получено из Redux
+    user: PropTypes.object.isRequired, // получено из Redux
     info:PropTypes.shape({
+      id: PropTypes.number.isRequired,
       nameProduct: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
@@ -20,17 +21,32 @@ class int_LaptopProductInfo extends React.PureComponent {
     limiter: false,
   }
 
-  addProductInBasket =()=> {
+  incCounter = (EO) => {
     if(!this.props.sign) alert('Вы не зарегистрированы. Пройдите авторизацию или регистрацию.');
-
-    if(this.props.sign&&!this.state.limiter) {
-      this.setState({limiter:true});
-      this.props.dispatch( { type:"ADD_PRODUCT_TO_BASKET", addProdact: this.props.info } );
-    } 
+    if(this.props.sign) this.props.dispatch( { type:"INC_PRODUCT", incProduct: {...this.props.info} } );
   }
 
+  decCounter = () => {
+    let qty=0;
+    if(this.props.sign) {
+      let arr =this.props.user.basketProducts;
+      arr.forEach(elem=>{
+        if(elem.id==this.props.info.id)  qty=elem.quantity; 
+      })
+    }
+    if(!this.props.sign) alert('Вы не зарегистрированы. Пройдите авторизацию или регистрацию.');
+    if(this.props.sign&&qty) this.props.dispatch( { type:"DEC_PRODUCT", decProduct: {...this.props.info} } );
+  }
 
   render() {
+    let qty=0;
+    if(this.props.sign) {
+      let arr =this.props.user.basketProducts;
+      arr.forEach(elem=>{
+        if(elem.id==this.props.info.id)  qty=elem.quantity; 
+      })
+    }
+
 
     return (
       <div className='LaptopContainerInfo'>
@@ -50,7 +66,14 @@ class int_LaptopProductInfo extends React.PureComponent {
             <div className='DetailedInfoProduct'>Операционная система: {this.props.info.OS}</div>
             <div className='DetailedInfoProduct'>Назначение: {this.props.info.appointment}</div>
             <div className='ProductPriceInfo'>{this.props.info.price.toFixed(2)} руб</div>
-            <button className='AddProductBasketInfo' onClick={this.addProductInBasket}>В корзину</button>
+            <div>
+              <span className="PutBusket">добавить в корзину</span>
+              <div className="CounterButton">
+              <input type='button' value='-' onClick={this.decCounter} />
+              <span className="CounterButtonValue">{qty}</span>
+              <input type='button' value='+' onClick={this.incCounter} />
+            </div>
+            </div>
           </div>
         </div>
       </div>
@@ -62,6 +85,7 @@ class int_LaptopProductInfo extends React.PureComponent {
 const mapStateToProps = function (state) {
   return {
     sign: state.signIn.stateIn,
+    user: state.dataUser.infoUser,
    };
 };
     

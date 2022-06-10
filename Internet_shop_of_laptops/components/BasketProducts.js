@@ -22,7 +22,7 @@ class int_BasketProducts extends React.PureComponent {
   render() {
 
     if(this.props.sign) {
-      let arr = JSON.parse(JSON.stringify(this.props.user.infoUser.basketProducts));
+      let arr = [...this.props.user.infoUser.basketProducts];
       var productsSelected=arr.map( product =>
         <BasketProduct key={product.id} info={product}  />
       );

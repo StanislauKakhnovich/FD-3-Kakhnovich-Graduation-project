@@ -12,7 +12,6 @@ const initState={
       case "PASSWORD_SUCCESS": {
         let newState={...state};
         newState.infoUser=action.infoReg;
-        console.log(newState);
         return newState;
       }
 
@@ -52,7 +51,6 @@ const initState={
                  break;
               } 
             }
-            console.log(arr)
         newState.infoUser.basketProducts=arr;
         storeInfo(newState);
         return newState;
@@ -87,7 +85,6 @@ const initState={
         arr=arr.filter(elem=>{
          return elem.id!=action.deleteProduct.id
         })
-        console.log(arr);
          newState.infoUser.basketProducts=arr;
         storeInfo(newState);
         return newState;
@@ -105,7 +102,6 @@ var data;
 
 function storeInfo(newState) {
   updatePassword=Math.random();
-  console.log(newState.infoUser.password)
   data=newState.infoUser
   $.ajax( {
           url : "https://fe.it-academy.by/AjaxStringStorage2.php", type : 'POST', cache : false, dataType:'json',
@@ -119,9 +115,6 @@ function lockGetReady(callresult) {
   if ( callresult.error!=undefined )
       alert(callresult.error);
   else {
-      // нам всё равно, что было прочитано -
-      // всё равно перезаписываем
-      console.log(data);
       var info=data
       $.ajax( {
               url : "https://fe.it-academy.by/AjaxStringStorage2.php", type : 'POST', cache : false, dataType:'json',

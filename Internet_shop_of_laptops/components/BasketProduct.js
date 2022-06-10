@@ -16,7 +16,9 @@ class int_BasketProduct extends React.PureComponent {
       quantity: PropTypes.number.isRequired,
     }),
   };
-
+  state = {
+    info: this.props.info,
+  }
 
   incCounter = () => {
     this.props.dispatch( { type:"INC", incProduct: {...this.props.info} } );
@@ -32,8 +34,8 @@ class int_BasketProduct extends React.PureComponent {
 
 
   render() {
-    
-    return (
+
+     return (
       <div className='LaptopsContainer'>
         <div className='LaptopProduct'>
           <div className='ImageLaptop'>
@@ -53,9 +55,7 @@ class int_BasketProduct extends React.PureComponent {
         </div>
       </div>
     );
-
   }
-
 }
 
 

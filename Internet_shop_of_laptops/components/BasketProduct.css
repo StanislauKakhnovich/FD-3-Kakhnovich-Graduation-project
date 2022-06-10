@@ -14,7 +14,7 @@
     font-size: 14px;
   }
 
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 850px) {
     .CounterButton,
     .DeleteProductBasket {
       text-align: center;
