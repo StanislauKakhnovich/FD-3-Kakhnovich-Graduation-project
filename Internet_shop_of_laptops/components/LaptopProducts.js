@@ -14,7 +14,7 @@ class LaptopProducts extends React.PureComponent {
 
 
   render() {
-
+    console.log('render LaptopProducts');
     if (this.props.products) {
       var productsCode=this.props.products.map( product =>
         <LaptopProduct key={product.id} info={product}  />

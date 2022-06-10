@@ -56,7 +56,6 @@ class int_LaptopProductsInterface extends React.PureComponent {
 
   }
 
-
   filterSide = () => {
     this.setState( {filter:false} );
   }
@@ -113,13 +112,17 @@ class int_LaptopProductsInterface extends React.PureComponent {
 
   filterReset =() =>{
     let arr = [];
-
     this.setState( {controls:  arr, controlSort: 1, products: this.props.products});
   }
 
   render() {
+    console.log('render LaptopProductsInterface');
+    if ( !this.props.products )
+    return <div id="preloader" className="hidden" aria-busy='true' aria-label='Загрузка данных, пожалуйста подождите.' role={'progressbar'}>
+      <img className="LaptopPreloader" src={`../images/Apple_MacBook_Pro_16_2019_MVVJ2.jpeg`} title="Laptop"></img>
+      </div>
     
-    return (
+    if ( this.state.products.length>0 ) return (
         <div className='ContainerProducts'>
           <div className='TopPanel'>
             <button className='Filters' onClick={this.filterSide}>Открыть панель фильтров</button>
@@ -204,6 +207,93 @@ class int_LaptopProductsInterface extends React.PureComponent {
               
           </div>
           <LaptopProducts products={this.state.products}/>
+        </div>
+    )
+       if ( this.state.products.length==0 ) return (
+        <div className='ContainerProducts'>
+          <div className='TopPanel'>
+            <button className='Filters' onClick={this.filterSide}>Открыть панель фильтров</button>
+          </div>
+          <div className={this.state.filter?'Hidden':'SidePanelFilters'}>
+                {
+                  !this.state.filter&&
+                  <button className='CloseFilters' onClick={this.closeFilterSide}>Закрыть панель фильтров</button>
+                }
+                <div>
+                <button className='CloseFilters' onClick={this.filterClick}>Применить фильтр</button>
+                </div>
+                <div>
+                <button className='CloseFilters' onClick={this.filterReset}>Сбросить фильтр</button>
+              </div>
+                {
+                  !this.state.filter&&
+                  <div className="SideNameFilter">Фильтры</div>
+                }
+              <div className='FilterPrice'>
+                <div className='SideNameFilter'>Сортировать:</div>
+                <input className='LeftRadio' type='radio' name='filterPrice' checked={this.state.controlSort == '1'} value={1} onChange={this.sortCheap}/><span className='LeftVariant'>Сначала популярные</span><br/>
+                <input className='LeftRadio' type='radio' name='filterPrice' checked={this.state.controlSort == '2'} value={2} onChange={this.sortCheap}/><span className='LeftVariant'>Сначала дешевые</span><br/>
+                <input className='LeftRadio' type='radio' name='filterPrice' checked={this.state.controlSort == '3'} value={3} onChange={this.sortCheap}/><span className='LeftVariant'>Сначала дорогие</span><br/>
+              </div>
+              <div className='Producer'>
+                <div className='SideNameFilter'>Производитель:</div>
+                <input className='LeftRadio' type='radio' name='producer' checked={this.state.controls[0] == '4'} value={4} onChange={this.choice}/><span className='LeftVariant'>Apple</span><br/>
+                <input className='LeftRadio' type='radio' name='producer' checked={this.state.controls[0] == '5'} value={5} onChange={this.choice}/><span className='LeftVariant'>Asus</span><br/>
+                <input className='LeftRadio' type='radio' name='producer' checked={this.state.controls[0] == '6'} value={6} onChange={this.choice}/><span className='LeftVariant'>Lenovo</span><br/>
+                <input className='LeftRadio' type='radio' name='producer' checked={this.state.controls[0] == '7'} value={7} onChange={this.choice}/><span className='LeftVariant'>HP</span><br/>
+                <input className='LeftRadio' type='radio' name='producer' checked={this.state.controls[0] == '8'} value={8} onChange={this.choice}/><span className='LeftVariant'>HONOR</span><br/>
+                <input className='LeftRadio' type='radio' name='producer' checked={this.state.controls[0] == '9'} value={9} onChange={this.choice}/><span className='LeftVariant'>Xiaomi</span><br/>
+                <input className='LeftRadio' type='radio' name='producer' checked={this.state.controls[0] == '10'} value={10} onChange={this.choice}/><span className='LeftVariant'>Huawei</span>
+              </div>
+              <div className='Appointment'>
+              
+                <div className='SideNameFilter'>Назначение:</div>
+                <input className='LeftRadio' type='radio' name='appointment' checked={this.state.controls[1] == '11'} value={11} onChange={this.choice}/><span className='LeftVariant'>для учебы</span><br/>
+                <input className='LeftRadio' type='radio' name='appointment' checked={this.state.controls[1] == '12'} value={12} onChange={this.choice}/><span className='LeftVariant'>для дома</span><br/>
+                <input className='LeftRadio' type='radio' name='appointment' checked={this.state.controls[1] == '13'} value={13} onChange={this.choice}/><span className='LeftVariant'>игровой</span><br/>
+                <input className='LeftRadio' type='radio' name='appointment' checked={this.state.controls[1] == '14'} value={14} onChange={this.choice}/><span className='LeftVariant'>для программирования</span><br/>
+                <input className='LeftRadio' type='radio' name='appointment' checked={this.state.controls[1] == '15'} value={15} onChange={this.choice}/><span className='LeftVariant'>компактный</span>
+              </div>
+              <div className='SkreenDiagonal'>
+                <div className='SideNameFilter'>Диагональ экрана:</div>
+                <input className='LeftRadio' type='radio' name='skreen' checked={this.state.controls[2] == '16'} value={16} onChange={this.choice}/><span className='LeftVariant'>менее 13&rdquo;</span><br/>
+                <input className='LeftRadio' type='radio' name='skreen' checked={this.state.controls[2] == '17'} value={17} onChange={this.choice}/><span className='LeftVariant'>13 &ndash; 14&rdquo;</span><br/>
+                <input className='LeftRadio' type='radio' name='skreen' checked={this.state.controls[2] == '18'} value={18} onChange={this.choice}/><span className='LeftVariant'>15 &ndash; 16&rdquo;</span><br/>
+                <input className='LeftRadio' type='radio' name='skreen' checked={this.state.controls[2] == '19'} value={19} onChange={this.choice}/><span className='LeftVariant'>более 17&rdquo;</span><br/>
+              </div>
+              <div className='Ram'>
+                <div className='SideNameFilter'>Оперативная память:</div>
+                <input className='LeftRadio' type='radio' name='ram' checked={this.state.controls[3] == '20'} value={20} onChange={this.choice}/><span className='LeftVariant'>от 8 ГБ</span><br/>
+                <input className='LeftRadio' type='radio' name='ram' checked={this.state.controls[3] == '21'} value={21} onChange={this.choice}/><span className='LeftVariant'>от 16 ГБ</span><br/>
+                <input className='LeftRadio' type='radio' name='ram' checked={this.state.controls[3] == '22'} value={22} onChange={this.choice}/><span className='LeftVariant'>от 32 ГБ</span><br/>
+              </div>
+              <div className='HddSdd'>
+                <div className='SideNameFilter'>Емкость накопителя:</div>
+                <input className='LeftRadio' type='radio' name='hddsdd' checked={this.state.controls[4] == '23'} onChange={this.choice} value={23}/><span className='LeftVariant'>от 256 ГБ</span><br/>
+                <input className='LeftRadio' type='radio' name='hddsdd' checked={this.state.controls[4] == '24'} onChange={this.choice} value={24}/><span className='LeftVariant'>от 512 ГБ</span><br/>
+                <input className='LeftRadio' type='radio' name='hddsdd' checked={this.state.controls[4] == '25'} onChange={this.choice} value={25}/><span className='LeftVariant'>от 1000 ГБ</span><br/>
+              </div>
+              <div className='Os'>
+                <div className='SideNameFilter'>Операционная система:</div>
+                <input className='LeftRadio' type='radio' name='os' checked={this.state.controls[5] == '27'} onChange={this.choice} value={27}/><span className='LeftVariant'>Windows 11</span><br/>
+                <input className='LeftRadio' type='radio' name='os' checked={this.state.controls[5] == '28'} onChange={this.choice} value={28}/><span className='LeftVariant'>Windows 10</span><br/>
+                <input className='LeftRadio' type='radio' name='os' checked={this.state.controls[5] == '29'} onChange={this.choice} value={29}/><span className='LeftVariant'>Linux</span><br/>
+                <input className='LeftRadio' type='radio' name='os' checked={this.state.controls[5] == '30'} onChange={this.choice} value={30}/><span className='LeftVariant'>Mac OS</span><br/>
+                <input className='LeftRadio' type='radio' name='os' checked={this.state.controls[5] == '31'} onChange={this.choice} value={31}/><span className='LeftVariant'>Без ОС</span>
+              </div>
+              {
+                  !this.state.filter&&
+                  <button className='CloseFilters' onClick={this.closeFilterSide}>Закрыть панель фильтров</button>
+                }
+              <div>
+                <button className='CloseFilters' onClick={this.filterClick}>Применить фильтр</button>
+              </div>
+              <div>
+                <button className='CloseFilters' onClick={this.filterReset}>Сбросить фильтр</button>
+              </div>
+              
+          </div>
+          <LaptopProducts products={this.props.products}/>
         </div>
     );
   }

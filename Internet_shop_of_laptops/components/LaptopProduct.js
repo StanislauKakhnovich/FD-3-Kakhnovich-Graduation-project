@@ -46,7 +46,8 @@ class int_LaptopProduct extends React.PureComponent {
   // }
 
   render() {
-    console.log('render');
+    // console.log('render '+this.props.info.id);
+    console.log('render Laptop');
     
     if(this.props.sign) {
       let arr = JSON.parse(JSON.stringify(this.props.user.basketProducts)); //this.props.user.basketProducts;
