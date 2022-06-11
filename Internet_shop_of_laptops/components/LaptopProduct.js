@@ -52,7 +52,7 @@ class int_LaptopProduct extends React.PureComponent {
       <div className='LaptopsContainer'>
         <div className='LaptopProduct'>
           <div className='ImageLaptop'>
-            <img src={`../images/${this.props.info.nameProduct.replace(/\s/g, '_')}.jpeg`} title={this.props.info.nameProduct} alt='Фото ноутбука'></img>
+            <img src={`../images_1/${this.props.info.nameProduct.replace(/\s/g, '_')}.jpeg`} title={this.props.info.nameProduct} alt='Фото ноутбука'></img>
           </div>
           <div className='Name-Description'>
             <NavLink to={"/product/"+this.props.info.id} className="NameProduct">Ноутбук {this.props.info.nameProduct}</NavLink>

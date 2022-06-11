@@ -66,7 +66,7 @@ errorHandler=(jqXHR,statusStr,errorStr)=> {
 
     if ( !this.state.dataReady )
     return <div id="preloader" className="hidden" aria-busy='true' aria-label='Загрузка данных, пожалуйста подождите.' role={'progressbar'}>
-      <img className="LaptopPreloader" src={`../images/Apple_MacBook_Pro_16_2019_MVVJ2.jpeg`} title="Laptop"></img>
+      <img className="LaptopPreloader" src={`../images_1/Apple_MacBook_Pro_16_2019_MVVJ2.jpeg`} title="Laptop"></img>
       </div>
 
     return (
