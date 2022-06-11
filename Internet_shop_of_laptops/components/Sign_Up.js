@@ -34,7 +34,6 @@ TownAdd = (EO) => {
   this.setState( {Town:EO.target.value} );
 }
 
-
 EmailAdd = (EO) => {
   this.setState( {Email:EO.target.value} );
   /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(EO.target.value) ? this.setState( {controlEmail:true} ) : this.setState( {controlEmail:false});
