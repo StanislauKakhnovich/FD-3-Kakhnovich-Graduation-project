@@ -55,6 +55,10 @@ restoreInfo =()=> {
       this.props.dispatch( { type:"SIGN_SUCCESS" } );
       this.props.dispatch( { type:"PASSWORD_SUCCESS", infoReg: info } );
   }
+  else if ( callresult.result=="" ){
+    this.setState({dataReady:true});
+    alert('Вы ввели неправильный пароль');
+  }
 }
 
 errorHandler=(jqXHR,statusStr,errorStr)=> {
