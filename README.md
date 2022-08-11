@@ -1,4 +1,4 @@
-This is a graduation project for the React js course.
+This is a graduation project for the React js course. Online store of laptops.
 
 Project setup:    npm i
 
