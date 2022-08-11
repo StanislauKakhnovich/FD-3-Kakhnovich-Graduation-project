@@ -53,7 +53,7 @@ class int_LaptopProductInfo extends React.PureComponent {
         <div className="NameProductInfo">Ноутбук {this.props.info.nameProduct}</div>
         <div className='LaptopProduct'>
           <div className='ImageLaptopInfo'>
-            <img src={`../images/${this.props.info.nameProduct.replace(/\s/g, '_')}.jpeg`}></img>
+            <img src={`../images_1/${this.props.info.nameProduct.replace(/\s/g, '_')}.jpeg`}></img>
           </div>
           <div className='VerticalContainer'>
             <div className='ProductDescriptionInfo'>{this.props.info.description}</div>
