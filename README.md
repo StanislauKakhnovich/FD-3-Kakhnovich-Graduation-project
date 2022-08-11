@@ -10,4 +10,4 @@ Project setup:    npm i
 Run:              npm run livebuild // сайт будет доступен по адресу http://localhost:8080/
 
 
-browse:           npm run browse //автоматическое открытие сайта в браузере по адресу http://localhost:8080/
+browse:           npm run browse //автоматическое открытие сайта в браузере по адресу http://localhost:3000/
